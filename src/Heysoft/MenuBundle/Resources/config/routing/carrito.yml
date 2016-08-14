@@ -1,0 +1,3 @@
+carrito:
+  path: /
+  defaults: { _controller: HeysoftMenuBundle:Carrito:ver }

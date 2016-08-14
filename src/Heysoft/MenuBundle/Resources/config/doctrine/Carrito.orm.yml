@@ -1,0 +1,27 @@
+Heysoft\MenuBundle\Entity\Carrito:
+    type: entity
+    table: null
+    repositoryClass: Heysoft\MenuBundle\Repository\CarritoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        user:
+            targetEntity: User
+            mappedBy: carrito 
+    manyToMany:
+        descripciones:
+            targetEntity: DescripcionPedido
+            inversedBy: carritos
+            joinTable:
+                name: carritos_descripciones_pedidos
+                joinColumns:
+                    carrito_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    descripcion_pedido_id:
+                        referencedColumnName: id
+    lifecycleCallbacks: {  }

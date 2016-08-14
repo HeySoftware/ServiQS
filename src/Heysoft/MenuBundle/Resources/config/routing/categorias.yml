@@ -1,0 +1,3 @@
+categoria:
+  path: /{nombre}
+  defaults: { _controller: HeysoftMenuBundle:Default:categoria }

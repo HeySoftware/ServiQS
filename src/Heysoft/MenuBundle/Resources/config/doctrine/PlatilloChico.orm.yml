@@ -1,0 +1,22 @@
+Heysoft\MenuBundle\Entity\PlatilloChico:
+    type: entity
+    table: null
+    repositoryClass: Heysoft\MenuBundle\Repository\PlatilloChicoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        platillochico:
+            type: string
+            length: 255
+            unique: true
+        precio:
+            type: float
+    manyToMany:
+        platillos:
+            targetEntity: Platillo
+            mappedBy: platilloschicos
+    lifecycleCallbacks: {  }

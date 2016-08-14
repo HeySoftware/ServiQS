@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Sistema de pedidos.">
+        <meta name="author" content="HeySoftware!">
+
+        <meta http-equiv="Content-Type" charset="UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <title>{% block title %}ServiQ{% endblock %}</title>
+
+        <!-- Bootstrap Core CSS -->
+        {% block stylesheets %}
+        <link href="{{ asset('bundles/css/bootstrap.min.css') }}" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="{{ asset('bundles/css/business-casual.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        <!-- Fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        
+        <div class="brand">ServiQ</div>
+        <div class="address-bar">UABC SAUZAL</div>
+        
+        <!-- Seccion principal? :O -->
+        <div class="container">
+            {% block body %}{% endblock %} 
+        </div>
+        
+        {% block javascripts %}
+        <!-- Hace posible el funcionamiento de JavaScript -->
+        <!-- jQuery -->
+        <script src="{{ asset('bundles/js/jquery.js') }}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('bundles/js/bootstrap.min.js') }}"></script>
+
+        <!-- Script to Activate the Carousel -->
+        <script>
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+        </script>
+
+        <script>
+            function request()
+            {
+                alert("Bien hecho");
+                // var xhttp = new XMLHttpRequest();
+                // var url = "operador.php?op=".concat(op);
+                // xhttp.open("GET",url,true);
+                // xhttp.send();
+            }
+        </script>
+        {% endblock %}
+
+    </body>
+</html>

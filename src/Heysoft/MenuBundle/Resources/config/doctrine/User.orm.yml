@@ -1,0 +1,23 @@
+Heysoft\MenuBundle\Entity\User:
+    type: entity
+    table: fos_user
+    repositoryClass: Heysoft\MenuBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        saldo:
+            type: float
+
+    oneToOne:
+        carrito:
+            targetEntity: Carrito
+            inversedBy: user
+            joinColumn:
+                name: carrito_id
+                referencedColumnName: id
+
+

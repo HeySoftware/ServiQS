@@ -1,0 +1,74 @@
+{% extends '::navbar.html.twig' %}
+
+{% block body %}
+<div class="panel panel-default">
+	<div class="panel-heading"><h1 style="text-align:center">{{ categoria }}</h1></div>
+</div>
+
+{% for platillo in platillos %}
+	<div class="panel panel-default">
+		<div class="panel-heading"><h2>{{ platillo.platillo }}</h2></div>
+		
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-2"><img src="{{ asset('bundles/img/menu/' ~ platillo.imagen) }}" alt="{{ platillo.imagen }}" width="75px" /></div>
+				<h4>
+				<div class="col-md-1">Precio</div>
+				<div class="col-md-2">${{ platillo.precio }}</div>
+				<div class="col-md-2">Duraci&oacute;n</div>
+				<div class="col-md-2">{{ platillo.duracion }} mins</div></h4>
+			</div>
+			
+			<div class="row">
+				<h4>
+				<div class="col-md-offset-2 col-md-2">Ingredientes</div>
+				<div class="col-md-8">{{ platillo.ingredientes }}</div></h4>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<button role="button" class="btn btn-success" data-toggle="modal" data-target="#aCar" onclick="aCarrito({{ platillo.id }})"> Agregar a Carrito </button>
+					<!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aCar" onclick="request()">Agregar a Carrito</button> -->
+				</div>
+			</div>			
+		</div>
+	</div>
+{% endfor %}
+
+<div class="modal fade" id="aCar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Has Agregado al Carrito</h4>
+			</div>
+			
+			<div class="modal-body">
+				Puedes ver tu carrito en la pesta&ntilde;a Ver/Carrito.
+			</div>
+				      
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<a href="{{ path('carrito') }}" class="btn btn-success">Ver Carrito</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script>
+		function aCarrito(platillo){
+    		$.post('{{path('heysoft_menu_agregar_carrito')}}',              
+                {id: platillo}, 
+            function(response){
+                    if(response.code == 100 && response.success){//dummy check
+                      //do something
+                    }
+    		}, "json");    
+}
+	</script>	
+{% endblock %}

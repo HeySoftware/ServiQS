@@ -1,0 +1,21 @@
+Heysoft\MenuBundle\Entity\Categoria:
+    type: entity
+    table: null
+    repositoryClass: Heysoft\MenuBundle\Repository\CategoriaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        categoria:
+            type: string
+            length: 255
+            unique: true
+    
+    oneToMany:
+        platillos:
+          targetEntity: Platillo
+          mappedBy: categoria
+    lifecycleCallbacks: {  }

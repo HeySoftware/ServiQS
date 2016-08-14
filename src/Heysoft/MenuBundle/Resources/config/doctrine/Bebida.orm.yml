@@ -1,0 +1,22 @@
+Heysoft\MenuBundle\Entity\Bebida:
+    type: entity
+    table: null
+    repositoryClass: Heysoft\MenuBundle\Repository\BebidaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        bebida:
+            type: string
+            length: 255
+            unique: true
+        precio:
+            type: float
+    manyToMany:
+        platillos:
+            targetEntity: Platillo
+            mappedBy: bebidas
+    lifecycleCallbacks: {  }

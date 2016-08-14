@@ -1,0 +1,90 @@
+{% extends '::navbar.html.twig' %}
+
+{% block body %}
+<div class="panel panel-default">
+	<div class="panel-heading"><h1 style="text-align:center">Carrito</h1></div>
+</div>
+
+{% for platillo in platillos %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2 class="pull-left">{{ platillo.platillo.platillo }}</h2>
+			<a role="button" class="pull-right" style="color:black"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+
+			<div class="clearfix"></div>
+		</div>
+		
+		<div class="panel-body">
+			<div class="row">
+				<table class="col-md-12" style="text-align:center">
+					<tr>
+						<td class="col-md-2" rowspan="2"><img src="{{ asset('bundles/img/menu/' ~ platillo.platillo.imagen) }}" alt="{{ platillo.platillo.imagen }}" width="75px" /></td>
+
+						<td class="col-md-3"><h4>Precio: ${{ platillo.platillo.precio }}</h4></td>
+						<td class="col-md-3"><h4>Cantidad</h4></td>
+						<td rowspan="2" class="col-md-4"><button class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></td>
+
+					</tr>
+					
+					<tr>
+
+					<td class="col-md-3"></td>
+					
+					
+					<td class="col-md-3"><h4>
+						<a role="button" onclick="qCarrito({{ platillo.platillo.id }})"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a> <span id="{{ 'carrito_cantidad_platillo_' ~ platillo.platillo.id }}">{{ platillo.cantidad }}</span> <a role="button" onclick="aCarrito({{ platillo.platillo.id }})"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></h4>
+					</td>
+
+					</h4>
+					</tr>
+				</table>
+			</div>
+
+<!-- 			<div class="row">
+				<div class="col-md-4">
+					<a class="btn btn-success" href="#">Hola</a>
+					<button role="button" class="btn btn-success" data-toggle="modal" data-target="#aCar" onclick="aCarrito({# platillo.id #})"> Agregar a Carrito </button>
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#aCar" onclick="request()">Agregar a Carrito</button>
+				</div>
+			</div> -->
+		</div>
+	</div>
+{% endfor %}
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h3 style="text-align:center" id="total">Total: ${{ total }}</h3>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script>
+		function aCarrito(platillo){
+    		$.post('{{path('heysoft_menu_agregar_carrito')}}',              
+                {id: platillo, mas: true}, 
+            function(response){
+                    if(response.code == 100 && response.success){
+                    	document.getElementById('carrito_cantidad_platillo_'+platillo).innerHTML = response.cantidad;
+
+                    	document.getElementById('total').innerHTML = "Total: $" + response.total;
+                    }
+    		}, "json");    
+		};
+
+		function qCarrito(platillo){
+    		$.post('{{path('heysoft_menu_quitar_carrito')}}',              
+                {id: platillo}, 
+            function(response){
+                    if(response.code == 100 && response.success){
+                    	document.getElementById('carrito_cantidad_platillo_'+platillo).innerHTML = response.cantidad;
+
+                    	document.getElementById('total').innerHTML = "Total: $" + response.total;
+                    }
+    		}, "json");    
+		}
+	</script>	
+{% endblock %}

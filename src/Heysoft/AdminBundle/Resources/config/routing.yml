@@ -1,0 +1,7 @@
+heysoft_admin_homepage:
+    path:     /
+    defaults: { _controller: HeysoftAdminBundle:Default:index }
+
+heysoft_menu_carrito:
+  prefix: /pedidos
+  resource: '@HeysoftAdminBundle/Resources/config/routing/pedidos.yml'

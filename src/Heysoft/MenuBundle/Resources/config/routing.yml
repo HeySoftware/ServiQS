@@ -1,0 +1,22 @@
+heysoft_menu_homepage:
+  path: /
+  defaults:
+      _controller: FrameworkBundle:Redirect:urlRedirect
+      path: /categoria/Comida_Del_Dia
+      permanent: true
+
+heysoft_menu_categorias:
+  prefix: /categoria
+  resource: '@HeysoftMenuBundle/Resources/config/routing/categorias.yml'
+
+heysoft_menu_carrito:
+  prefix: /carrito
+  resource: '@HeysoftMenuBundle/Resources/config/routing/carrito.yml'
+
+heysoft_menu_agregar_carrito:
+  path: /carrito/agregar/ajax/call/
+  defaults: { _controller: HeysoftMenuBundle:Carrito:Agregar }
+
+heysoft_menu_quitar_carrito:
+  path: /carrito/quitar/ajax/call/
+  defaults: { _controller: HeysoftMenuBundle:Carrito:Quitar }

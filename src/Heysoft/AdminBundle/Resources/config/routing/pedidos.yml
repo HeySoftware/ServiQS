@@ -1,0 +1,3 @@
+pedidos:
+  path: /
+  defaults: { _controller: HeysoftAdminBundle:Default:listarPedidos }
