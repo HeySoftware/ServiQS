@@ -1,3 +1,7 @@
 carrito:
   path: /
   defaults: { _controller: HeysoftMenuBundle:Carrito:ver }
+
+editar_carrito:
+  path: /editar/{id}
+  defaults: { _controller: HeysoftMenuBundle:Carrito:editar }

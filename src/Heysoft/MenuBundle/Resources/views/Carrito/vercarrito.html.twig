@@ -6,10 +6,10 @@
 </div>
 
 {% for platillo in platillos %}
-	<div class="panel panel-default">
+	<div id="{{ 'carrito_div_platillo_' ~ platillo.platillo.id }}" class="panel panel-default">
 		<div class="panel-heading">
 			<h2 class="pull-left">{{ platillo.platillo.platillo }}</h2>
-			<a role="button" class="pull-right" style="color:black"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+			<a role="button" class="pull-right" style="color:black" onclick="eCarrito({{ platillo.platillo.id }})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 
 			<div class="clearfix"></div>
 		</div>
@@ -22,7 +22,11 @@
 
 						<td class="col-md-3"><h4>Precio: ${{ platillo.platillo.precio }}</h4></td>
 						<td class="col-md-3"><h4>Cantidad</h4></td>
-						<td rowspan="2" class="col-md-4"><button class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></td>
+						<td rowspan="2" class="col-md-4">
+							<a href="{{ path('editar_carrito', {'id': platillo.platillo.id }) }}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+
+							{# <button type="button" class="btn btn-success" data-toggle="modal" data-target="{{ '#carrito_modal_platillo_' ~ platillo.platillo.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button> #}
+						</td>
 
 					</tr>
 					
@@ -49,6 +53,33 @@
 			</div> -->
 		</div>
 	</div>
+
+
+	<div class="modal fade" id="{{ 'carrito_modal_platillo_' ~ platillo.platillo.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">{{ platillo.platillo.platillo }}</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<div id="{{ 'carrito_descripciones_platillo_' ~ platillo.platillo.id }}">
+	      		{% for descripcion in carrito.descripciones %}
+	      			{% if descripcion.platillo == platillo.platillo %}
+	      				{{ "Hola" }}
+	      			{% endif %}
+	      		{% endfor %}
+	      		</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 {% endfor %}
 
 	<div class="panel panel-default">
@@ -71,6 +102,8 @@
                     	document.getElementById('carrito_cantidad_platillo_'+platillo).innerHTML = response.cantidad;
 
                     	document.getElementById('total').innerHTML = "Total: $" + response.total;
+
+                    	document.getElementById('carrito_descripciones_platillo_'+platillo).innerHTML = adios;
                     }
     		}, "json");    
 		};
@@ -83,6 +116,20 @@
                     	document.getElementById('carrito_cantidad_platillo_'+platillo).innerHTML = response.cantidad;
 
                     	document.getElementById('total').innerHTML = "Total: $" + response.total;
+
+                    	document.getElementById('carrito_descripciones_platillo_'+platillo).innerHTML = adios;
+                    }
+    		}, "json");    
+		};
+
+		function eCarrito(platillo){
+    		$.post('{{path('heysoft_menu_eliminar_carrito')}}',              
+                {id: platillo}, 
+            function(response){
+                    if(response.code == 100 && response.success){
+                    	document.getElementById('total').innerHTML = "Total: $" + response.total;
+
+                    	document.getElementById('carrito_div_platillo_'+platillo).remove();
                     }
     		}, "json");    
 		}

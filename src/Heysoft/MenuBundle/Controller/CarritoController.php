@@ -5,8 +5,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Heysoft\MenuBundle\Entity\DescripcionPedido;
+use Heysoft\MenuBundle\Form\CarritoType;
 
 use Heysoft\MenuBundle\Resources\extra\Cantidad;
 
@@ -50,7 +53,46 @@ class CarritoController extends Controller
     return $this->render('HeysoftMenuBundle:Carrito:vercarrito.html.twig', array('carrito' => $carrito, 'platillos' => $platillos, 'total' => $total));
   }
 
-	public function AgregarAction(Request $request)
+  public function editarAction(Request $request, $id)
+  {
+    $user = $this->getUser();
+    $carrito = $user->getCarrito();
+    $descripciones = $carrito->getDescripciones();
+
+    $repository = $this->getDoctrine()->getRepository('HeysoftMenuBundle:Platillo');
+    $platillo = $repository->findOneById($id);
+
+    $editar = array();
+
+    foreach($descripciones as $descripcion)
+    {
+      if($descripcion->getPlatillo() === $platillo)
+      {
+        array_push($editar, $descripcion);
+      }
+    }
+
+    if(count($editar) == 0)
+    {
+      throw new NotFoundHttpException("Page not found");
+    }
+
+    $form = $this->createForm(CarritoType::class, $carrito);
+
+    $form->handleRequest($request);
+
+    if($form->isValid())
+    {
+      return new Response("Hola");
+    }
+
+    return $this->render('HeysoftMenuBundle:Carrito:edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+  }
+
+
+	public function agregarAction(Request $request)
     {	
     	$data = $request->request->get('id',null);
 
@@ -99,7 +141,7 @@ class CarritoController extends Controller
       return new JsonResponse($response);
     }
 
-    public function QuitarAction(Request $request)
+    public function quitarAction(Request $request)
     { 
       $data = $request->request->get('id',null);
 
@@ -131,6 +173,42 @@ class CarritoController extends Controller
       $em->flush();
 
       $response = array("code" => 100, "success" => true, "cantidad" => $cantidad, "total" => $total);
+      
+      return new JsonResponse($response);
+    }
+
+    public function eliminarAction(Request $request)
+    {
+      $data = $request->request->get('id',null);
+
+      $repository = $this->getDoctrine()->getRepository('HeysoftMenuBundle:Platillo');
+
+      $user = $this->getUser();
+      $em = $this->getDoctrine()->getManager();
+
+      $carrito = $user->getCarrito();
+      $platillo = $repository->findOneById($data);
+
+      $descripciones = $carrito->getDescripciones();
+
+      //En duda
+      $total = 0;
+
+      foreach($descripciones as $descripcion)
+      {
+        if($descripcion->getPlatillo() === $platillo)
+        {
+          $em->remove($descripcion);
+        }
+        else
+        {
+          $total = $total + $descripcion->getPlatillo()->getPrecio();
+        }
+      }
+
+      $em->flush();
+
+      $response = array("code" => 100, "success" => true, "total" => $total);
       
       return new JsonResponse($response);
     }
