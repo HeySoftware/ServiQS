@@ -1,0 +1,16 @@
+{% extends "::navbar.html.twig" %}
+
+{% block body %}
+<div class="panel panel-default">
+	<div class="panel-heading"><h1 style="text-align:center">Venta</h1></div>
+</div>
+
+<div class="panel panel-default">
+	<form method="POST" action="{{ path('pagar') }}">
+		{% for cartItem in carrito.descripciones %}
+			{{ cartItem.platillo.platillo }}<br>
+		{% endfor %}
+		<button type="submit">Pagar</button>
+	</form>
+</div>
+{% endblock %}

@@ -8,7 +8,10 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
@@ -20,6 +23,7 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
+            'TrueBV\\' => 7,
             'Tests\\' => 6,
         ),
         'S' => 
@@ -44,15 +48,34 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Cache\\' => 10,
+            'Payum\\ISO4217\\' => 14,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
         ),
+        'L' => 
+        array (
+            'League\\Url\\' => 11,
+        ),
         'I' => 
         array (
             'Incenteev\\ParameterHandler\\' => 27,
+        ),
+        'H' => 
+        array (
+            'Http\\Promise\\' => 13,
+            'Http\\Client\\' => 12,
+            'Http\\Adapter\\Guzzle6\\' => 21,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
         ),
         'F' => 
         array (
@@ -69,6 +92,10 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
     );
 
     public static $prefixDirsPsr4 = array (
+        'TrueBV\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/true/punycode/src',
+        ),
         'Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
@@ -141,17 +168,57 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         array (
             0 => __DIR__ . '/..' . '/sensio/distribution-bundle',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Payum\\ISO4217\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/payum/iso4217',
         ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'League\\Url\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/url/src',
+        ),
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
+        ),
+        'Http\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/httplug/src',
+        ),
+        'Http\\Adapter\\Guzzle6\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/guzzle6-adapter/src',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
         'FOS\\UserBundle\\' => 
         array (
@@ -200,9 +267,13 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         ),
         'P' => 
         array (
-            'Psr\\Log\\' => 
+            'Payum\\Paypal\\ExpressCheckout\\Nvp' => 
             array (
-                0 => __DIR__ . '/..' . '/psr/log',
+                0 => __DIR__ . '/..' . '/payum/paypal-express-checkout-nvp',
+            ),
+            'Payum\\Core\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/payum/core',
             ),
         ),
         'D' => 

@@ -2,7 +2,8 @@
 
 {% block body %}
 <div class="panel panel-default">
-	<div class="panel-heading"><h1 style="text-align:center">Carrito</h1></div>
+	<div class="panel-heading"><h1 style="text-align:center">Carrito
+	<a class="btn btn-success pull-right" href="{{ path('venta') }}"> Comprar </a></h1></div>
 </div>
 
 {% for platillo in platillos %}
@@ -23,7 +24,7 @@
 						<td class="col-md-3"><h4>Precio: ${{ platillo.platillo.precio }}</h4></td>
 						<td class="col-md-3"><h4>Cantidad</h4></td>
 						<td rowspan="2" class="col-md-4">
-							<a href="{{ path('editar_carrito', {'id': platillo.platillo.id }) }}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+							<a href="{{ path('editar_carrito', {'id': platillo.platillo.id }) }}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Eliminar del carrito"></span></a>
 
 							{# <button type="button" class="btn btn-success" data-toggle="modal" data-target="{{ '#carrito_modal_platillo_' ~ platillo.platillo.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button> #}
 						</td>

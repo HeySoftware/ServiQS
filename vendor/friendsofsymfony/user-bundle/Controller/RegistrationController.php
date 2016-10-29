@@ -11,40 +11,45 @@
 
 namespace FOS\UserBundle\Controller;
 
-use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use FOS\UserBundle\Model\UserInterface;
-use Heysoft\MenuBundle\Entity\Carrito;
 
 /**
- * Controller managing the registration
+ * Controller managing the registration.
  *
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  * @author Christophe Coevoet <stof@notk.org>
  */
 class RegistrationController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function registerAction(Request $request)
     {
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
         $user = $userManager->createUser();
         $user->setEnabled(true);
-
-        $carrito = new Carrito();
-        $user->setCarrito($carrito);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -58,25 +63,32 @@ class RegistrationController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($carrito);
-            $em->flush($carrito);
+                $userManager->updateUser($user);
 
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->getParameter('fos_user.registration.confirmation.enabled')
+                        ? $this->generateUrl('fos_user_registration_confirmed')
+                        : $this->generateUrl('fos_user_profile_show');
 
-            $userManager->updateUser($user);
+                    $response = new RedirectResponse($url);
+                }
 
-            if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
-                $response = new RedirectResponse($url);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
             }
 
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
 
-            return $response;
+            if (null !== $response = $event->getResponse()) {
+                return $response;
+            }
         }
 
         return $this->render('FOSUserBundle:Registration:register.html.twig', array(
@@ -85,11 +97,16 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Tell the user to check his email provider
+     * Tell the user to check his email provider.
      */
     public function checkEmailAction()
     {
         $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
+
+        if (empty($email)) {
+            return new RedirectResponse($this->get('router')->generate('fos_user_registration_register'));
+        }
+
         $this->get('session')->remove('fos_user_send_confirmation_email/email');
         $user = $this->get('fos_user.user_manager')->findUserByEmail($email);
 
@@ -97,13 +114,18 @@ class RegistrationController extends Controller
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
 
-        return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
+        return $this->render('FOSUserBundle:Registration:check_email.html.twig', array(
             'user' => $user,
         ));
     }
 
     /**
-     * Receive the confirmation token from user email provider, login the user
+     * Receive the confirmation token from user email provider, login the user.
+     *
+     * @param Request $request
+     * @param string  $token
+     *
+     * @return Response
      */
     public function confirmAction(Request $request, $token)
     {
@@ -116,7 +138,7 @@ class RegistrationController extends Controller
             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
         }
 
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
         $user->setConfirmationToken(null);
@@ -138,7 +160,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Tell the user his account is now confirmed
+     * Tell the user his account is now confirmed.
      */
     public function confirmedAction()
     {
@@ -153,16 +175,12 @@ class RegistrationController extends Controller
         ));
     }
 
+    /**
+     * @return mixed
+     */
     private function getTargetUrlFromSession()
     {
-        // Set the SecurityContext for Symfony <2.6
-        if (interface_exists('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')) {
-            $tokenStorage = $this->get('security.token_storage');
-        } else {
-            $tokenStorage = $this->get('security.context');
-        }
-
-        $key = sprintf('_security.%s.target_path', $tokenStorage->getToken()->getProviderKey());
+        $key = sprintf('_security.%s.target_path', $this->get('security.token_storage')->getToken()->getProviderKey());
 
         if ($this->get('session')->has($key)) {
             return $this->get('session')->get($key);

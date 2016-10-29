@@ -1,6 +1,29 @@
 Changelog
 =========
 
+### 2.0.0-alpha4 (2016-xx-xx)
+
+* Dropped Symfony < 2.7 support.
+* Dropped PHP < 5.5 support.
+* Exclude tests from autoloader.
+* Allow to use POST for logout.
+* Fix UserPassword constraint validation groups.
+* Harmonized email detection in `UserManager`.
+* Added unique index for `confirmation_token` field.
+* Added Kyrgyz translation files.
+* Added user manipulator events.
+* Replaced `checkPostAuth` by `checkPreAuth` in `AuthenticationListener`.
+* [BC break] Method `ResettingController::getObfuscatedEmail` has been removed.
+* [BC break] Renamed templates to underscore case.
+* [BC break] Removed `UserManager::refreshUser`.
+* [BC break] Removed `UserManager::loadUserByUsername`.
+* [BC break] Removed `UserManager::supportsClass`.
+* [BC break] The signature of the `Initializer` constructor has changed.
+* [BC break] The signature of the `LoginManager` constructor has changed.
+* [BC break] The signature of the `UserListener` constructor has changed.
+* [BC break] The signature of the `UserManager` constructor has changed.
+* [BC break] The translation key `resetting.request.invalid_username` has been removed.
+
 ### 2.0.0-alpha3 (2015-09-15)
 
 * Reverted the removed of the `expired` and `credentialsExpired` properties as the BC break could lead to corrupted objects being created if server sessions are not cleared when upgrading the bundle.

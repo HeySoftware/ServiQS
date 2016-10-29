@@ -39,9 +39,12 @@ registration:
         message: "Cześć %username%!\n\nAby potwierdzić swoje konto - proszę przejść do %confirmationUrl%\n\nPozdrawiamy,\nZespół.\n"
 resetting:
     password_already_requested: 'W przeciągu ostatnich 24 godzin nastąpiła już próba odzyskania hasła.'
-    check_email: 'Na adres %email% wysłano wiadomość e-mail. Zawiera ona link, w którego należy kliknąć, aby zresetować hasło.'
+    check_email: |
+        E-mail został wysłany. Zawiera on link do formularza zmiany hasła.
+        Uwaga: Możesz zresetować hasło tylko jeden raz w ciągu %tokenLifetime% godzin.
+
+        Sprawdź swoją skrzynkę pocztową, jeśli jednak nie widzisz wiadomości od nas, sprawdź folder spam lub spróbuj ponownie później.
     request:
-        invalid_username: 'Nazwa użytkownika lub e-mail "%username%" nie istnieje.'
         username: 'Nazwa użytkownika lub e-mail'
         submit: 'Resetuj hasło'
     reset:

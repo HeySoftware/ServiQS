@@ -7,29 +7,26 @@
 
 {% for platillo in platillos %}
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2>{{ platillo.platillo }}</h2></div>
+		<div class="panel-heading"><h2 class="pull-left">{{ platillo.platillo }}</h2><button role="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#aCar" onclick="aCarrito({{ platillo.id }})"> Agregar a Carrito </button>
+			<div class="clearfix"></div>
+		</div>
 		
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-2"><img src="{{ asset('bundles/img/menu/' ~ platillo.imagen) }}" alt="{{ platillo.imagen }}" width="75px" /></div>
+				<div class="col-md-3"><img src="{{ asset('bundles/img/menu/' ~ platillo.imagen) }}" alt="{{ platillo.imagen }}" width="75px" /></div>
 				<h4>
-				<div class="col-md-1">Precio</div>
-				<div class="col-md-2">${{ platillo.precio }}</div>
+				<div class="col-md-2">Precio</div>
+				
 				<div class="col-md-2">Duraci&oacute;n</div>
-				<div class="col-md-2">{{ platillo.duracion }} mins</div></h4>
+				
+				<div class="col-md-5">Ingredientes</div></h4>
 			</div>
 			
 			<div class="row">
 				<h4>
-				<div class="col-md-offset-2 col-md-2">Ingredientes</div>
-				<div class="col-md-8">{{ platillo.ingredientes }}</div></h4>
-			</div>
-
-			<div class="row">
-				<div class="col-md-4">
-					<button role="button" class="btn btn-success" data-toggle="modal" data-target="#aCar" onclick="aCarrito({{ platillo.id }})"> Agregar a Carrito </button>
-					<!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aCar" onclick="request()">Agregar a Carrito</button> -->
-				</div>
+				<div class="col-md-offset-3 col-md-2">${{ platillo.precio }}</div>
+				<div class="col-md-2">{{ platillo.duracion }} mins</div>
+				<div class="col-md-5">{{ platillo.ingredientes }}</div></h4>
 			</div>			
 		</div>
 	</div>

@@ -11,10 +11,8 @@
 
 namespace Symfony\Component\DependencyInjection\Tests\Loader;
 
-use Symfony\Bridge\PhpUnit\ErrorAssert;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -239,7 +237,7 @@ class XmlFileLoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('sc_configure', $services['configurator1']->getConfigurator(), '->load() parses the configurator tag');
         $this->assertEquals(array(new Reference('baz', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, false), 'configure'), $services['configurator2']->getConfigurator(), '->load() parses the configurator tag');
         $this->assertEquals(array('BazClass', 'configureStatic'), $services['configurator3']->getConfigurator(), '->load() parses the configurator tag');
-        $this->assertEquals(array(array('setBar', array()), array('setBar', array(new Expression('service("foo").foo() ~ (container.hasparameter("foo") ? parameter("foo") : "default")')))), $services['method_call1']->getMethodCalls(), '->load() parses the method_call tag');
+        $this->assertEquals(array(array('setBar', array()), array('setBar', array(new Expression('service("foo").foo() ~ (container.hasParameter("foo") ? parameter("foo") : "default")')))), $services['method_call1']->getMethodCalls(), '->load() parses the method_call tag');
         $this->assertEquals(array(array('setBar', array('foo', new Reference('foo'), array(true, false)))), $services['method_call2']->getMethodCalls(), '->load() parses the method_call tag');
         $this->assertEquals('factory', $services['new_factory1']->getFactory(), '->load() parses the factory tag');
         $this->assertEquals(array(new Reference('baz', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, false), 'getClass'), $services['new_factory2']->getFactory(), '->load() parses the factory tag');
@@ -300,6 +298,21 @@ class XmlFileLoaderTest extends \PHPUnit_Framework_TestCase
         $container = new ContainerBuilder();
         $loader = new XmlFileLoader($container, new FileLocator(self::$fixturesPath.'/xml'));
         $loader->load('tag_with_empty_name.xml');
+    }
+
+    public function testDeprecated()
+    {
+        $container = new ContainerBuilder();
+        $loader = new XmlFileLoader($container, new FileLocator(self::$fixturesPath.'/xml'));
+        $loader->load('services_deprecated.xml');
+
+        $this->assertTrue($container->getDefinition('foo')->isDeprecated());
+        $message = 'The "foo" service is deprecated. You should stop using it, as it will soon be removed.';
+        $this->assertSame($message, $container->getDefinition('foo')->getDeprecationMessage('foo'));
+
+        $this->assertTrue($container->getDefinition('bar')->isDeprecated());
+        $message = 'The "bar" service is deprecated.';
+        $this->assertSame($message, $container->getDefinition('bar')->getDeprecationMessage('bar'));
     }
 
     public function testConvertDomElementToArray()
@@ -544,22 +557,17 @@ class XmlFileLoaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group legacy
+     * @expectedDeprecation Using the attribute "class" is deprecated for the service "bar" which is defined as an alias %s.
+     * @expectedDeprecation Using the element "tag" is deprecated for the service "bar" which is defined as an alias %s.
+     * @expectedDeprecation Using the element "factory" is deprecated for the service "bar" which is defined as an alias %s.
      */
     public function testAliasDefinitionContainsUnsupportedElements()
     {
-        $deprecations = array(
-            'Using the attribute "class" is deprecated for alias definition "bar"',
-            'Using the element "tag" is deprecated for alias definition "bar"',
-            'Using the element "factory" is deprecated for alias definition "bar"',
-        );
+        $container = new ContainerBuilder();
+        $loader = new XmlFileLoader($container, new FileLocator(self::$fixturesPath.'/xml'));
 
-        ErrorAssert::assertDeprecationsAreTriggered($deprecations, function () {
-            $container = new ContainerBuilder();
-            $loader = new XmlFileLoader($container, new FileLocator(self::$fixturesPath.'/xml'));
+        $loader->load('legacy_invalid_alias_definition.xml');
 
-            $loader->load('legacy_invalid_alias_definition.xml');
-
-            $this->assertTrue($container->has('bar'));
-        });
+        $this->assertTrue($container->has('bar'));
     }
 }

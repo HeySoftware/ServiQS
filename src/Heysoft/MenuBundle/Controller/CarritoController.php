@@ -87,7 +87,7 @@ class CarritoController extends Controller
     }
 
     return $this->render('HeysoftMenuBundle:Carrito:edit.html.twig', array(
-            'form' => $form->createView(),
+            'form' => $form->createView(), 'platillo' => $platillo->getPlatillo()
         ));
   }
 

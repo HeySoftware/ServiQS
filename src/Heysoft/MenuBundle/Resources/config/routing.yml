@@ -24,3 +24,11 @@ heysoft_menu_quitar_carrito:
 heysoft_menu_eliminar_carrito:
   path: /carrito/eliminar/ajax/call/
   defaults: { _controller: HeysoftMenuBundle:Carrito:eliminar }
+
+venta:
+  path: /venta
+  defaults: { _controller: HeysoftMenuBundle:Venta:inicio }
+
+pagar:
+  path: /pago
+  defaults: { _controller: HeysoftMenuBundle:Venta:pagar }

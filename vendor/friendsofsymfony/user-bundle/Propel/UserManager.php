@@ -13,30 +13,32 @@ namespace FOS\UserBundle\Propel;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManager as BaseUserManager;
-use FOS\UserBundle\Util\CanonicalizerInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use FOS\UserBundle\Util\CanonicalFieldsUpdater;
+use FOS\UserBundle\Util\PasswordUpdaterInterface;
 
 class UserManager extends BaseUserManager
 {
+    /**
+     * @var string
+     */
     protected $class;
 
     /**
      * Constructor.
      *
-     * @param EncoderFactoryInterface $encoderFactory
-     * @param CanonicalizerInterface  $usernameCanonicalizer
-     * @param CanonicalizerInterface  $emailCanonicalizer
-     * @param string                  $class
+     * @param PasswordUpdaterInterface $passwordUpdater
+     * @param CanonicalFieldsUpdater   $canonicalFieldsUpdater
+     * @param string                   $class
      */
-    public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, $class)
+    public function __construct(PasswordUpdaterInterface $passwordUpdater, CanonicalFieldsUpdater $canonicalFieldsUpdater, $class)
     {
-        parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer);
+        parent::__construct($passwordUpdater, $canonicalFieldsUpdater);
 
         $this->class = $class;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function deleteUser(UserInterface $user)
     {
@@ -48,7 +50,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClass()
     {
@@ -56,7 +58,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findUserBy(array $criteria)
     {
@@ -71,7 +73,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findUsers()
     {
@@ -79,7 +81,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function reloadUser(UserInterface $user)
     {
@@ -91,7 +93,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function updateUser(UserInterface $user)
     {
@@ -105,7 +107,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * Create the propel query class corresponding to your queryclass
+     * Create the propel query class corresponding to your queryclass.
      *
      * @return \ModelCriteria the queryClass
      */
