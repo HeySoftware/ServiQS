@@ -8,11 +8,15 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '50b81ffc01da30f98e463592787d7917' => __DIR__ . '/..' . '/jeremykendall/php-domain-parser/src/pdp-parse-url.php',
+        'ddc0a4d7e61c0286f0f8593b1903e894' => __DIR__ . '/..' . '/clue/stream-filter/src/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'ee05f3eb6cd106ac99bfaf4d0d9829d8' => __DIR__ . '/..' . '/league/uri/src/functions_include.php',
+        '8cff32064859f4559445b89279f3199c' => __DIR__ . '/..' . '/php-http/message/src/filters.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -23,7 +27,6 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
-            'TrueBV\\' => 7,
             'Tests\\' => 6,
         ),
         'S' => 
@@ -59,7 +62,7 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         ),
         'L' => 
         array (
-            'League\\Url\\' => 11,
+            'League\\Uri\\' => 11,
         ),
         'I' => 
         array (
@@ -68,6 +71,7 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         'H' => 
         array (
             'Http\\Promise\\' => 13,
+            'Http\\Message\\' => 13,
             'Http\\Client\\' => 12,
             'Http\\Adapter\\Guzzle6\\' => 21,
         ),
@@ -85,17 +89,18 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         array (
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Cache\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
+        'C' => 
+        array (
+            'Clue\\StreamFilter\\' => 18,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'TrueBV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/true/punycode/src',
-        ),
         'Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
@@ -188,9 +193,9 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'League\\Url\\' => 
+        'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/url/src',
+            0 => __DIR__ . '/..' . '/league/uri/src',
         ),
         'Incenteev\\ParameterHandler\\' => 
         array (
@@ -199,6 +204,11 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         'Http\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/message-factory/src',
+            1 => __DIR__ . '/..' . '/php-http/message/src',
         ),
         'Http\\Client\\' => 
         array (
@@ -232,6 +242,10 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
@@ -243,6 +257,10 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         'Doctrine\\Bundle\\DoctrineBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
+        ),
+        'Clue\\StreamFilter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/clue/stream-filter/src',
         ),
     );
 
@@ -267,6 +285,10 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
         ),
         'P' => 
         array (
+            'Pdp\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jeremykendall/php-domain-parser/src',
+            ),
             'Payum\\Paypal\\ExpressCheckout\\Nvp' => 
             array (
                 0 => __DIR__ . '/..' . '/payum/paypal-express-checkout-nvp',
@@ -297,10 +319,6 @@ class ComposerStaticInitda9b236fb29cee79022ea8fec541840d
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
-            ),
-            'Doctrine\\Common\\Annotations\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
             ),
         ),
     );

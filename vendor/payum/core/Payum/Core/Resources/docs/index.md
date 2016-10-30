@@ -19,6 +19,8 @@
 * [ISO4217. Currency details](iso4217-or-currency-details.md)
 * [Payum vs Omnipay](payum-vs-omnipay.md)
 * [PHP7](php7.md)
+* [Symfony. The event dispatcher extension](event-dispatcher.md)
+* [How to contribute from sub repository](how-to-contribute-from-subrepository.md)
 
 
 ## Gateways
@@ -29,7 +31,9 @@
 * [Klarna Invoice](https://github.com/Payum/Payum/blob/master/src/Payum/Klarna/Invoice/Resources/docs/index.md)
 * [Payex](https://github.com/Payum/Payum/blob/master/src/Payum/Payex/Resources/docs/index.md)
 * [Paypal Express Checkout](https://github.com/Payum/Payum/blob/master/src/Payum/Paypal/ExpressCheckout/Nvp/Resources/docs/index.md)
+* [Paypal Masspay](https://github.com/Payum/Payum/blob/master/src/Payum/Paypal/Masspay/Nvp/Resources/docs/index.md)
 * [Paypal Pro Checkout](https://github.com/Payum/Payum/blob/master/src/Payum/Paypal/ProCheckout/Nvp/Resources/docs/index.md)
+* [Paypal Pro Hosted](https://github.com/Payum/Payum/blob/master/src/Payum/Paypal/ProHosted/Nvp/Resources/docs/index.md)
 * [Paypal REST](https://github.com/Payum/Payum/blob/master/src/Payum/Paypal/Rest/Resources/docs/index.md)
 * [Paypal IPN](https://github.com/Payum/Payum/blob/master/src/Payum/Paypal/Ipn/Resources/docs/index.md)
 * [Stripe](https://github.com/Payum/Payum/blob/master/src/Payum/Stripe/Resources/docs/index.md)

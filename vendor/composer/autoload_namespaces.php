@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'SensioLabs\\Security' => array($vendorDir . '/sensiolabs/security-checker'),
+    'Pdp\\' => array($vendorDir . '/jeremykendall/php-domain-parser/src'),
     'Payum\\Paypal\\ExpressCheckout\\Nvp' => array($vendorDir . '/payum/paypal-express-checkout-nvp'),
     'Payum\\Core\\' => array($vendorDir . '/payum/core'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
@@ -15,5 +16,4 @@ return array(
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
-    'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
 );

@@ -4,6 +4,8 @@
 
 * [Paypal Express Checkout](https://github.com/Payum/PaypalExpressCheckoutNvp/blob/master/Resources/docs/index.md)
 * [Paypal Pro Checkout](https://github.com/Payum/PaypalProCheckoutNvp/blob/master/Resources/docs/index.md)
+* [Paypal Pro Hosted](https://github.com/Payum/PaypalProHostedNvp/blob/master/Resources/docs/index.md)
+* [Paypal Masspay](https://github.com/Payum/PaypalMasspayNvp/blob/master/Resources/docs/index.md)
 * [Paypal Rest](https://github.com/Payum/PaypalRest/blob/master/Resources/docs/index.md)
 * [Stripe.js](https://github.com/Payum/Stripe/blob/master/Resources/docs/get-it-started.md)
 * [Stripe Checkout](https://github.com/Payum/Stripe/blob/master/Resources/docs/checkout.md)
@@ -42,11 +44,10 @@
 * [khal3d/payum-cashnpay](https://github.com/khal3d/payum-cashnpay)
 * [NetTeam/payum-adyen](https://github.com/NetTeam/payum-adyen)
 * [NetTeam/payum-paymill](https://github.com/NetTeam/payum-paymill)
-* [fullpipe/payum-uniteller](https://github.com/fullpipe/payum-uniteller)
-* [fullpipe/payum-flexidengi](https://github.com/fullpipe/payum-flexidengi)
 * [BoShurik/payum-yandex-money](https://github.com/BoShurik/payum-yandex-money)
 * [sergeym/payum-pay-receipt](https://github.com/sergeym/payum-pay-receipt)
 * [remyma/payum-paybox](https://github.com/remyma/payum-paybox)
+* [artkonekt/payum-otp-hungary](https://github.com/artkonekt/payum-otp-hungary)
 
 ## Omnipay gateways.
 
@@ -89,6 +90,7 @@
 * [thephpleague/omnipay-targetpay](https://github.com/thephpleague/omnipay-targetpay)
 * [thephpleague/omnipay-worldpay](https://github.com/thephpleague/omnipay-worldpay)
 * [aTastyCookie/yandexmoney_omnipay](https://github.com/aTastyCookie/yandexmoney_omnipay)
+* [antqa/payum-perfectmoney](https://github.com/antqa/payum-perfectmoney)
 
 ## JMS payment plugins
 
