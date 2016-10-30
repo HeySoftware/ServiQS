@@ -498,6 +498,7 @@ class DoctrineExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('doctrine_cache.providers.result_cache', (string) $alias);
     }
 
+<<<<<<< HEAD
     public function testShardManager()
     {
         $container = $this->getContainer();
@@ -521,6 +522,8 @@ class DoctrineExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($container->hasDefinition('doctrine.dbal.bar_shard_manager'));
     }
 
+=======
+>>>>>>> master
     private function getContainer($bundles = 'YamlBundle', $vendor = null)
     {
         $bundles = (array) $bundles;

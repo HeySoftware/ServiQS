@@ -28,7 +28,11 @@ abstract class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 
     protected function getBundle()
     {
+<<<<<<< HEAD
         $bundle = $this->getMockBuilder('Symfony\Component\HttpKernel\Bundle\BundleInterface')->getMock();
+=======
+        $bundle = $this->getMock('Symfony\Component\HttpKernel\Bundle\BundleInterface');
+>>>>>>> master
         $bundle
             ->expects($this->any())
             ->method('getPath')
@@ -49,7 +53,11 @@ abstract class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 
     protected function getContainer()
     {
+<<<<<<< HEAD
         $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\KernelInterface')->getMock();
+=======
+        $kernel = $this->getMock('Symfony\Component\HttpKernel\KernelInterface');
+>>>>>>> master
         $kernel
             ->expects($this->any())
             ->method('getBundle')
@@ -61,7 +69,11 @@ abstract class GenerateCommandTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array($this->getBundle())))
         ;
 
+<<<<<<< HEAD
         $filesystem = $this->getMockBuilder('Symfony\Component\Filesystem\Filesystem')->getMock();
+=======
+        $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
+>>>>>>> master
         $filesystem
             ->expects($this->any())
             ->method('isAbsolutePath')

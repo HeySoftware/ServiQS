@@ -9,6 +9,11 @@
  * file that was distributed with this source code.
  */
 
+<<<<<<< HEAD
+=======
+namespace Sensio\Bundle\GeneratorBundle\Tests\Generator;
+
+>>>>>>> master
 namespace Sensio\Bundle\GeneratorBundle\Tests\Manipulator;
 
 use Sensio\Bundle\GeneratorBundle\Manipulator\RoutingManipulator;
@@ -60,7 +65,11 @@ class RoutingManipulatorTest extends \PHPUnit_Framework_TestCase
 
     public function testHasResourceInAnnotation()
     {
+<<<<<<< HEAD
         $tmpDir = sys_get_temp_dir().'/sf';
+=======
+        $tmpDir = sys_get_temp_dir().'/sf2';
+>>>>>>> master
         $file = tempnam($tmpDir, 'routing');
 
         $routing = <<<DATA
@@ -77,7 +86,11 @@ DATA;
 
     public function testHasResourceInAnnotationReturnFalseIfOnlyOneControllerDefined()
     {
+<<<<<<< HEAD
         $tmpDir = sys_get_temp_dir().'/sf';
+=======
+        $tmpDir = sys_get_temp_dir().'/sf2';
+>>>>>>> master
         $file = tempnam($tmpDir, 'routing');
 
         $routing = <<<DATA

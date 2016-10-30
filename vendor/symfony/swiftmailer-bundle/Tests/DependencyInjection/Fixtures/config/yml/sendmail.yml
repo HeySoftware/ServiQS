@@ -1,3 +1,6 @@
 swiftmailer:
     transport:  sendmail
+<<<<<<< HEAD
     local_domain: local.example.org
+=======
+>>>>>>> master

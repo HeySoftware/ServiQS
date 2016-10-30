@@ -15,8 +15,12 @@
             encryption="tls"
             auth-mode="login"
             timeout="1000"
+<<<<<<< HEAD
             source-ip="127.0.0.1"
             local-domain="local.example.org">
+=======
+            source-ip="127.0.0.1">
+>>>>>>> master
         </swiftmailer:mailer>
     </swiftmailer:config>
 </container>

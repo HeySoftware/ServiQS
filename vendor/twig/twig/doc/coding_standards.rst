@@ -95,7 +95,13 @@ standards:
   .. code-block:: jinja
 
      {% block foo %}
+<<<<<<< HEAD
          {% if true %}
              true
          {% endif %}
+=======
+        {% if true %}
+            true
+        {% endif %}
+>>>>>>> master
      {% endblock %}

@@ -16,7 +16,11 @@
             auth-mode="login"
             timeout="1000"
             source-ip="127.0.0.1"
+<<<<<<< HEAD
             local-domain="local.example.org"
             logging="true">
     </swiftmailer:config>
+=======
+            logging="true"/>
+>>>>>>> master
 </container>

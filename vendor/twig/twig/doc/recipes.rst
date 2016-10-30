@@ -306,7 +306,11 @@ saving it. If the template code is stored in a `$template` variable, here is
 how you can do it::
 
     try {
+<<<<<<< HEAD
         $twig->parse($twig->tokenize(new Twig_Source($template)));
+=======
+        $twig->parse($twig->tokenize($template));
+>>>>>>> master
 
         // the $template is valid
     } catch (Twig_Error_Syntax $e) {
@@ -318,7 +322,11 @@ If you iterate over a set of files, you can pass the filename to the
 
     foreach ($files as $file) {
         try {
+<<<<<<< HEAD
             $twig->parse($twig->tokenize(new Twig_Source($template, $file->getFilename(), $file)));
+=======
+            $twig->parse($twig->tokenize($template, $file));
+>>>>>>> master
 
             // the $template is valid
         } catch (Twig_Error_Syntax $e) {
@@ -326,10 +334,13 @@ If you iterate over a set of files, you can pass the filename to the
         }
     }
 
+<<<<<<< HEAD
 .. versionadded:: 1.27
     ``Twig_Source`` was introduced in version 1.27, pass the source and the
     identifier directly on previous versions.
 
+=======
+>>>>>>> master
 .. note::
 
     This method won't catch any sandbox policy violations because the policy
@@ -417,7 +428,11 @@ We have created a simple ``templates`` table that hosts two templates:
 
 Now, let's define a loader able to use this database::
 
+<<<<<<< HEAD
     class DatabaseTwigLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface, Twig_SourceContextLoaderInterface
+=======
+    class DatabaseTwigLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface
+>>>>>>> master
     {
         protected $dbh;
 
@@ -435,6 +450,7 @@ Now, let's define a loader able to use this database::
             return $source;
         }
 
+<<<<<<< HEAD
         // Twig_SourceContextLoaderInterface as of Twig 1.27
         public function getSourceContext($name)
         {
@@ -445,6 +461,8 @@ Now, let's define a loader able to use this database::
             return new Twig_Source($source, $name);
         }
 
+=======
+>>>>>>> master
         // Twig_ExistsLoaderInterface as of Twig 1.11
         public function exists($name)
         {
@@ -529,6 +547,7 @@ From PHP, it's also possible to load a template stored in a string via
 
     Never use the ``Twig_Loader_String`` loader, which has severe limitations.
 
+<<<<<<< HEAD
 Using Twig and AngularJS in the same Templates
 ----------------------------------------------
 
@@ -565,4 +584,6 @@ include in your templates:
     )));
     ```
 
+=======
+>>>>>>> master
 .. _callback: http://www.php.net/manual/en/function.is-callable.php

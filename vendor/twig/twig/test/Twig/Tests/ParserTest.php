@@ -16,7 +16,11 @@ class Twig_Tests_ParserTest extends PHPUnit_Framework_TestCase
     public function testSetMacroThrowsExceptionOnReservedMethods()
     {
         $parser = $this->getParser();
+<<<<<<< HEAD
         $parser->setMacro('parent', $this->getMockBuilder('Twig_Node_Macro')->disableOriginalConstructor()->getMock());
+=======
+        $parser->setMacro('parent', $this->getMock('Twig_Node_Macro', array(), array(), '', null));
+>>>>>>> master
     }
 
     /**
@@ -31,7 +35,11 @@ class Twig_Tests_ParserTest extends PHPUnit_Framework_TestCase
             new Twig_Token(Twig_Token::BLOCK_END_TYPE, '', 1),
             new Twig_Token(Twig_Token::EOF_TYPE, '', 1),
         ));
+<<<<<<< HEAD
         $parser = new Twig_Parser(new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock()));
+=======
+        $parser = new Twig_Parser(new Twig_Environment($this->getMock('Twig_LoaderInterface')));
+>>>>>>> master
         $parser->parse($stream);
     }
 
@@ -47,7 +55,11 @@ class Twig_Tests_ParserTest extends PHPUnit_Framework_TestCase
             new Twig_Token(Twig_Token::BLOCK_END_TYPE, '', 1),
             new Twig_Token(Twig_Token::EOF_TYPE, '', 1),
         ));
+<<<<<<< HEAD
         $parser = new Twig_Parser(new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock()));
+=======
+        $parser = new Twig_Parser(new Twig_Environment($this->getMock('Twig_LoaderInterface')));
+>>>>>>> master
         $parser->parse($stream);
     }
 
@@ -100,7 +112,11 @@ class Twig_Tests_ParserTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Twig_Error_Syntax
+<<<<<<< HEAD
      * @expectedExceptionMessage A template that extends another one cannot start with a byte order mark (BOM); it must be removed at line 1
+=======
+     * @expectedExceptionMessage A template that extends another one cannot have a body but a byte order mark (BOM) has been detected; it must be removed at line 1.
+>>>>>>> master
      */
     public function testFilterBodyNodesWithBOM()
     {
@@ -110,7 +126,11 @@ class Twig_Tests_ParserTest extends PHPUnit_Framework_TestCase
 
     public function testParseIsReentrant()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock(), array(
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'), array(
+>>>>>>> master
             'autoescape' => false,
             'optimizations' => 0,
         ));
@@ -136,27 +156,45 @@ class Twig_Tests_ParserTest extends PHPUnit_Framework_TestCase
     // see https://github.com/symfony/symfony/issues/4218
     public function testGetVarName()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock(), array(
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'), array(
+>>>>>>> master
             'autoescape' => false,
             'optimizations' => 0,
         ));
 
+<<<<<<< HEAD
         $twig->parse($twig->tokenize(new Twig_Source(<<<EOF
+=======
+        $twig->parse($twig->tokenize(<<<EOF
+>>>>>>> master
 {% from _self import foo %}
 
 {% macro foo() %}
     {{ foo }}
 {% endmacro %}
 EOF
+<<<<<<< HEAD
         , 'index')));
+=======
+        ));
+>>>>>>> master
     }
 
     protected function getParser()
     {
+<<<<<<< HEAD
         $parser = new TestParser(new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock()));
         $parser->setParent(new Twig_Node());
         $parser->stream = $this->getMockBuilder('Twig_TokenStream')->disableOriginalConstructor()->getMock();
         $parser->stream->expects($this->any())->method('getSourceContext')->will($this->returnValue(new Twig_Source('', '')));
+=======
+        $parser = new TestParser(new Twig_Environment($this->getMock('Twig_LoaderInterface')));
+        $parser->setParent(new Twig_Node());
+        $parser->stream = $this->getMockBuilder('Twig_TokenStream')->disableOriginalConstructor()->getMock();
+>>>>>>> master
 
         return $parser;
     }

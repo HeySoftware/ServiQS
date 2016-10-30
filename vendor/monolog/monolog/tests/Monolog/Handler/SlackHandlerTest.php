@@ -13,7 +13,10 @@ namespace Monolog\Handler;
 
 use Monolog\TestCase;
 use Monolog\Logger;
+<<<<<<< HEAD
 use Monolog\Formatter\LineFormatter;
+=======
+>>>>>>> master
 
 /**
  * @author Greg Kedzierski <greg@gregkedzierski.com>
@@ -58,6 +61,7 @@ class SlackHandlerTest extends TestCase
         $this->assertRegexp('/token=myToken&channel=channel1&username=Monolog&text=&attachments=.*$/', $content);
     }
 
+<<<<<<< HEAD
     public function testWriteContentUsesFormatterIfProvided()
     {
         $this->createHandler('myToken', 'channel1', 'Monolog', false);
@@ -75,6 +79,8 @@ class SlackHandlerTest extends TestCase
         $this->assertRegexp('/token=myToken&channel=channel1&username=Monolog&text=foo--test2.*$/', $content2);
     }
 
+=======
+>>>>>>> master
     public function testWriteContentWithEmoji()
     {
         $this->createHandler('myToken', 'channel1', 'Monolog', true, 'alien');

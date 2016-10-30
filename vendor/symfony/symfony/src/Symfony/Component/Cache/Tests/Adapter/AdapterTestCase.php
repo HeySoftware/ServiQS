@@ -15,6 +15,7 @@ use Cache\IntegrationTests\CachePoolTest;
 
 abstract class AdapterTestCase extends CachePoolTest
 {
+<<<<<<< HEAD
     protected function setUp()
     {
         parent::setUp();
@@ -24,6 +25,8 @@ abstract class AdapterTestCase extends CachePoolTest
         }
     }
 
+=======
+>>>>>>> master
     public function testDefaultLifeTime()
     {
         if (isset($this->skippedTests[__FUNCTION__])) {
@@ -46,6 +49,7 @@ abstract class AdapterTestCase extends CachePoolTest
         $item = $cache->getItem('key.dlt');
         $this->assertFalse($item->isHit());
     }
+<<<<<<< HEAD
 
     public function testNotUnserializable()
     {
@@ -84,4 +88,6 @@ class NotUnserializable implements \Serializable
     {
         throw new \Exception(__CLASS__);
     }
+=======
+>>>>>>> master
 }

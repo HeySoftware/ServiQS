@@ -16,7 +16,10 @@
             auth-mode="login"
             timeout="1000"
             source-ip="127.0.0.1"
+<<<<<<< HEAD
             local-domain="first.example.org"
+=======
+>>>>>>> master
             logging="true"
             delivery-address="single@host.com">
             <swiftmailer:antiflood/>
@@ -31,7 +34,10 @@
             auth-mode="login"
             timeout="1000"
             source-ip="127.0.0.1"
+<<<<<<< HEAD
             local-domain="second.example.org"
+=======
+>>>>>>> master
             logging="true"
             delivery-address="single@host.com">
             <swiftmailer:spool type="memory"/>
@@ -46,7 +52,10 @@
             auth-mode="login"
             timeout="1000"
             source-ip="127.0.0.1"
+<<<<<<< HEAD
             local-domain="third.example.org"
+=======
+>>>>>>> master
             logging="true"
             delivery-address="single@host.com">
         </swiftmailer:mailer>

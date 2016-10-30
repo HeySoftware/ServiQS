@@ -22,6 +22,7 @@ class DoctrineFormGeneratorTest extends GeneratorTest
         $this->assertTrue(file_exists($this->tmpDir.'/Form/PostType.php'));
 
         $content = file_get_contents($this->tmpDir.'/Form/PostType.php');
+<<<<<<< HEAD
         $this->assertContains('namespace Foo\BarBundle\Form', $content);
         $this->assertContains('class PostType extends AbstractType', $content);
         $this->assertContains('->add(\'title\')', $content);
@@ -55,11 +56,30 @@ class DoctrineFormGeneratorTest extends GeneratorTest
         } else {
             // BC Symfony 2.7
             $this->assertContains('public function getName()', $content);
+=======
+        $this->assertContains('->add(\'title\')', $content);
+        $this->assertContains('->add(\'createdAt\', \'date\')', $content);
+        $this->assertContains('->add(\'publishedAt\', \'time\')', $content);
+        $this->assertContains('->add(\'updatedAt\', \'datetime\')', $content);
+        $this->assertContains('class PostType extends AbstractType', $content);
+        $this->assertContains("'data_class' => 'Foo\BarBundle\Entity\Post'", $content);
+
+        if (!method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $this->assertContains('getName', $content);
+            $this->assertContains("'foo_barbundle_post'", $content);
+        } else {
+            $this->assertNotContains('getName', $content);
+            $this->assertNotContains("'foo_barbundle_post'", $content);
+>>>>>>> master
         }
     }
 
     /**
+<<<<<<< HEAD
      * @expectedException \RuntimeException
+=======
+     * @expectedException RuntimeException
+>>>>>>> master
      * @expectedExceptionMessageRegExp: Unable to generate the PostType form class as it already exists under the .* file
      */
     public function testNonOverwrittenForm()
@@ -81,7 +101,11 @@ class DoctrineFormGeneratorTest extends GeneratorTest
         $generator = new DoctrineFormGenerator($this->filesystem);
         $generator->setSkeletonDirs(__DIR__.'/../../Resources/skeleton');
 
+<<<<<<< HEAD
         $bundle = $this->getMockBuilder('Symfony\Component\HttpKernel\Bundle\BundleInterface')->getMock();
+=======
+        $bundle = $this->getMock('Symfony\Component\HttpKernel\Bundle\BundleInterface');
+>>>>>>> master
         $bundle->expects($this->any())->method('getPath')->will($this->returnValue($this->tmpDir));
         $bundle->expects($this->any())->method('getNamespace')->will($this->returnValue('Foo\BarBundle'));
 
@@ -97,6 +121,7 @@ class DoctrineFormGeneratorTest extends GeneratorTest
 
         $generator->generate($bundle, 'Post', $metadata, $overwrite);
     }
+<<<<<<< HEAD
 
     private function generateSubNamespacedEntityForm($overwrite)
     {
@@ -119,4 +144,6 @@ class DoctrineFormGeneratorTest extends GeneratorTest
 
         $generator->generate($bundle, 'Blog\Post', $metadata, $overwrite);
     }
+=======
+>>>>>>> master
 }

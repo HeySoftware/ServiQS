@@ -14,7 +14,11 @@ class Twig_Tests_ErrorTest extends PHPUnit_Framework_TestCase
     public function testErrorWithObjectFilename()
     {
         $error = new Twig_Error('foo');
+<<<<<<< HEAD
         $error->setTemplateName(new SplFileInfo(__FILE__));
+=======
+        $error->setTemplateFile(new SplFileInfo(__FILE__));
+>>>>>>> master
 
         $this->assertContains('test'.DIRECTORY_SEPARATOR.'Twig'.DIRECTORY_SEPARATOR.'Tests'.DIRECTORY_SEPARATOR.'ErrorTest.php', $error->getMessage());
     }
@@ -22,7 +26,11 @@ class Twig_Tests_ErrorTest extends PHPUnit_Framework_TestCase
     public function testErrorWithArrayFilename()
     {
         $error = new Twig_Error('foo');
+<<<<<<< HEAD
         $error->setTemplateName(array('foo' => 'bar'));
+=======
+        $error->setTemplateFile(array('foo' => 'bar'));
+>>>>>>> master
 
         $this->assertEquals('foo in {"foo":"bar"}', $error->getMessage());
     }
@@ -38,9 +46,15 @@ class Twig_Tests_ErrorTest extends PHPUnit_Framework_TestCase
 
             $this->fail();
         } catch (Twig_Error_Runtime $e) {
+<<<<<<< HEAD
             $this->assertEquals('Variable "foo" does not exist in "index.html" at line 3.', $e->getMessage());
             $this->assertEquals(3, $e->getTemplateLine());
             $this->assertEquals('index.html', $e->getTemplateName());
+=======
+            $this->assertEquals('Variable "foo" does not exist in "index.html" at line 3', $e->getMessage());
+            $this->assertEquals(3, $e->getTemplateLine());
+            $this->assertEquals('index.html', $e->getTemplateFile());
+>>>>>>> master
         }
 
         try {
@@ -50,7 +64,11 @@ class Twig_Tests_ErrorTest extends PHPUnit_Framework_TestCase
         } catch (Twig_Error_Runtime $e) {
             $this->assertEquals('An exception has been thrown during the rendering of a template ("Runtime error...") in "index.html" at line 3.', $e->getMessage());
             $this->assertEquals(3, $e->getTemplateLine());
+<<<<<<< HEAD
             $this->assertEquals('index.html', $e->getTemplateName());
+=======
+            $this->assertEquals('index.html', $e->getTemplateFile());
+>>>>>>> master
         }
     }
 
@@ -69,9 +87,15 @@ class Twig_Tests_ErrorTest extends PHPUnit_Framework_TestCase
 
             $this->fail();
         } catch (Twig_Error_Runtime $e) {
+<<<<<<< HEAD
             $this->assertEquals(sprintf('Variable "foo" does not exist in "%s" at line %d.', $name, $line), $e->getMessage());
             $this->assertEquals($line, $e->getTemplateLine());
             $this->assertEquals($name, $e->getTemplateName());
+=======
+            $this->assertEquals(sprintf('Variable "foo" does not exist in "%s" at line %d', $name, $line), $e->getMessage());
+            $this->assertEquals($line, $e->getTemplateLine());
+            $this->assertEquals($name, $e->getTemplateFile());
+>>>>>>> master
         }
 
         try {
@@ -81,7 +105,11 @@ class Twig_Tests_ErrorTest extends PHPUnit_Framework_TestCase
         } catch (Twig_Error_Runtime $e) {
             $this->assertEquals(sprintf('An exception has been thrown during the rendering of a template ("Runtime error...") in "%s" at line %d.', $name, $line), $e->getMessage());
             $this->assertEquals($line, $e->getTemplateLine());
+<<<<<<< HEAD
             $this->assertEquals($name, $e->getTemplateName());
+=======
+            $this->assertEquals($name, $e->getTemplateFile());
+>>>>>>> master
         }
     }
 

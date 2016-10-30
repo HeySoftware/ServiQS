@@ -244,14 +244,22 @@ DATA;
 
     protected function getDoctrine()
     {
+<<<<<<< HEAD
         $cache = $this->getMockBuilder('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver')->getMock();
+=======
+        $cache = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
+>>>>>>> master
         $cache
             ->expects($this->any())
             ->method('getAllClassNames')
             ->will($this->returnValue(array('Acme\Bundle\BlogBundle\Entity\Post')))
         ;
 
+<<<<<<< HEAD
         $configuration = $this->getMockBuilder('Doctrine\ORM\Configuration')->getMock();
+=======
+        $configuration = $this->getMock('Doctrine\ORM\Configuration');
+>>>>>>> master
         $configuration
             ->expects($this->any())
             ->method('getMetadataDriverImpl')
@@ -264,14 +272,22 @@ DATA;
             ->will($this->returnValue(array('AcmeBlogBundle' => 'Acme\Bundle\BlogBundle\Entity')))
         ;
 
+<<<<<<< HEAD
         $manager = $this->getMockBuilder('Doctrine\ORM\EntityManagerInterface')->getMock();
+=======
+        $manager = $this->getMock('Doctrine\ORM\EntityManagerInterface');
+>>>>>>> master
         $manager
             ->expects($this->any())
             ->method('getConfiguration')
             ->will($this->returnValue($configuration))
         ;
 
+<<<<<<< HEAD
         $registry = $this->getMockBuilder('Symfony\Bridge\Doctrine\RegistryInterface')->getMock();
+=======
+        $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
+>>>>>>> master
         $registry
             ->expects($this->any())
             ->method('getAliasNamespace')

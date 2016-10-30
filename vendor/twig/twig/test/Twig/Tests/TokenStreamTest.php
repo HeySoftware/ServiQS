@@ -27,6 +27,7 @@ class Twig_Tests_TokenStreamTest extends PHPUnit_Framework_TestCase
         );
     }
 
+<<<<<<< HEAD
     /**
      * @group legacy
      */
@@ -39,6 +40,8 @@ class Twig_Tests_TokenStreamTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('{{ foo }}', $stream->getSourceContext()->getCode());
     }
 
+=======
+>>>>>>> master
     public function testNext()
     {
         $stream = new Twig_TokenStream(self::$tokens);

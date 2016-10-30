@@ -164,9 +164,13 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'namespace Foo\BarBundle\Controller;',
             'public function indexAction',
             'public function showAction',
+<<<<<<< HEAD
             '@Route("/post")', // Controller level
             '@Route("/", name="post_index")',
             '@Route("/{id}", name="post_show")',
+=======
+            '@Route',
+>>>>>>> master
         );
         foreach ($strings as $string) {
             $this->assertContains($string, $content);
@@ -182,6 +186,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
         }
     }
 
+<<<<<<< HEAD
     public function testGenerateNamespacedEntity()
     {
         $this->getGenerator()->generate($this->getBundle(), 'Blog\Post', $this->getMetadata(), 'annotation', '/blog_post', true, true);
@@ -224,6 +229,8 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
         }
     }
 
+=======
+>>>>>>> master
     /**
      * @dataProvider getRoutePrefixes
      */
@@ -268,7 +275,11 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
 
     protected function getBundle()
     {
+<<<<<<< HEAD
         $bundle = $this->getMockBuilder('Symfony\Component\HttpKernel\Bundle\BundleInterface')->getMock();
+=======
+        $bundle = $this->getMock('Symfony\Component\HttpKernel\Bundle\BundleInterface');
+>>>>>>> master
         $bundle->expects($this->any())->method('getPath')->will($this->returnValue($this->tmpDir));
         $bundle->expects($this->any())->method('getName')->will($this->returnValue('FooBarBundle'));
         $bundle->expects($this->any())->method('getNamespace')->will($this->returnValue('Foo\BarBundle'));

@@ -22,7 +22,11 @@ class ConfigurationManipulatorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+<<<<<<< HEAD
         $this->tmpDir = sys_get_temp_dir().'/sf';
+=======
+        $this->tmpDir = sys_get_temp_dir().'/sf2';
+>>>>>>> master
         $this->filesystem = new Filesystem();
         $this->filesystem->remove($this->tmpDir);
         $this->filesystem->mkdir($this->tmpDir);
@@ -118,8 +122,13 @@ imports:
     - { resource: services.yml }
 
 twig:
+<<<<<<< HEAD
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+=======
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+>>>>>>> master
 EOF
             , <<<EOF
 framework:
@@ -133,8 +142,13 @@ imports:
     - { resource: "@AppBundle/Resources/config/services.yml" }
 
 twig:
+<<<<<<< HEAD
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+=======
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+>>>>>>> master
 EOF
         );
 

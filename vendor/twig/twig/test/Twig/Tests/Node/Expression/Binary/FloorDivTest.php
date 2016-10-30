@@ -28,7 +28,11 @@ class Twig_Tests_Node_Expression_Binary_FloorDivTest extends Twig_Test_NodeTestC
         $node = new Twig_Node_Expression_Binary_FloorDiv($left, $right, 1);
 
         return array(
+<<<<<<< HEAD
             array($node, '(int) floor((1 / 2))'),
+=======
+            array($node, 'intval(floor((1 / 2)))'),
+>>>>>>> master
         );
     }
 }

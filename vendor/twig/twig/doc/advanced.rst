@@ -136,6 +136,7 @@ Creating a filter is as simple as associating a name with a PHP callable::
     // or a simple PHP function
     $filter = new Twig_SimpleFilter('rot13', 'str_rot13');
 
+<<<<<<< HEAD
     // or a class static method
     $filter = new Twig_SimpleFilter('rot13', array('SomeClass', 'rot13Filter'));
     $filter = new Twig_SimpleFilter('rot13', 'SomeClass::rot13Filter');
@@ -143,6 +144,9 @@ Creating a filter is as simple as associating a name with a PHP callable::
     // or a class method
     $filter = new Twig_SimpleFilter('rot13', array($this, 'rot13Filter'));
     // the one below needs a runtime implementation (see below for more information)
+=======
+    // or a class method
+>>>>>>> master
     $filter = new Twig_SimpleFilter('rot13', array('SomeClass', 'rot13Filter'));
 
 The first argument passed to the ``Twig_SimpleFilter`` constructor is the name
@@ -531,6 +535,13 @@ reusable class like adding support for internationalization. An extension can
 define tags, filters, tests, operators, global variables, functions, and node
 visitors.
 
+<<<<<<< HEAD
+=======
+Creating an extension also makes for a better separation of code that is
+executed at compilation time and code needed at runtime. As such, it makes
+your code faster.
+
+>>>>>>> master
 Most of the time, it is useful to create a single extension for your project,
 to host all the specific tags and filters you want to add to Twig.
 
@@ -615,12 +626,16 @@ An extension is a class that implements the following interface::
          * Returns the name of the extension.
          *
          * @return string The extension name
+<<<<<<< HEAD
          *
          * @deprecated since 1.26 (to be removed in 2.0), not used anymore internally
+=======
+>>>>>>> master
          */
         function getName();
     }
 
+<<<<<<< HEAD
 To keep your extension class clean and lean, inherit from the built-in
 ``Twig_Extension`` class instead of implementing the interface as it provides
 empty implementations for all methods:
@@ -636,6 +651,30 @@ next sections.
 
     Prior to Twig 1.26, you must implement the ``getName()`` method which must
     return a unique identifier for the extension.
+=======
+To keep your extension class clean and lean, it can inherit from the built-in
+``Twig_Extension`` class instead of implementing the whole interface. That
+way, you just need to implement the ``getName()`` method as the
+``Twig_Extension`` provides empty implementations for all other methods.
+
+The ``getName()`` method must return a unique identifier for your extension.
+
+Now, with this information in mind, let's create the most basic extension
+possible::
+
+    class Project_Twig_Extension extends Twig_Extension
+    {
+        public function getName()
+        {
+            return 'project';
+        }
+    }
+
+.. note::
+
+    Of course, this extension does nothing for now. We will customize it in
+    the next sections.
+>>>>>>> master
 
 Twig does not care where you save your extension on the filesystem, as all
 extensions must be registered explicitly to be available in your templates.
@@ -648,7 +687,11 @@ main ``Environment`` object::
 
 .. tip::
 
+<<<<<<< HEAD
     The Twig core extensions are great examples of how extensions work.
+=======
+    The bundled extensions are great examples of how extensions work.
+>>>>>>> master
 
 Globals
 ~~~~~~~
@@ -767,6 +810,7 @@ The ``getTests()`` method lets you add new test functions::
         // ...
     }
 
+<<<<<<< HEAD
 Definition vs Runtime
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -862,6 +906,8 @@ It is now possible to move the runtime logic to a new
         }
     }
 
+=======
+>>>>>>> master
 Overloading
 -----------
 
@@ -882,6 +928,14 @@ possible** (order matters)::
         {
             // do something different from the built-in date filter
         }
+<<<<<<< HEAD
+=======
+
+        public function getName()
+        {
+            return 'project';
+        }
+>>>>>>> master
     }
 
     $twig = new Twig_Environment($loader);
@@ -889,7 +943,11 @@ possible** (order matters)::
 
 Here, we have overloaded the built-in ``date`` filter with a custom one.
 
+<<<<<<< HEAD
 If you do the same on the ``Twig_Environment`` itself, beware that it takes
+=======
+If you do the same on the Twig_Environment itself, beware that it takes
+>>>>>>> master
 precedence over any other registered extensions::
 
     $twig = new Twig_Environment($loader);

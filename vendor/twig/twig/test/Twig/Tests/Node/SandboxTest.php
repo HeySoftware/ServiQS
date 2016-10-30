@@ -28,7 +28,11 @@ class Twig_Tests_Node_SandboxTest extends Twig_Test_NodeTestCase
 
         $tests[] = array($node, <<<EOF
 // line 1
+<<<<<<< HEAD
 \$sandbox = \$this->env->getExtension('Twig_Extension_Sandbox');
+=======
+\$sandbox = \$this->env->getExtension('sandbox');
+>>>>>>> master
 if (!\$alreadySandboxed = \$sandbox->isSandboxed()) {
     \$sandbox->enableSandbox();
 }

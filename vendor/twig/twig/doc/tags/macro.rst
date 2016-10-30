@@ -13,7 +13,11 @@ Here is a small example of a macro that renders a form element:
         <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value|e }}" size="{{ size|default(20) }}" />
     {% endmacro %}
 
+<<<<<<< HEAD
 Macros differ from native PHP functions in a few ways:
+=======
+Macros differs from native PHP functions in a few ways:
+>>>>>>> master
 
 * Default argument values are defined by using the ``default`` filter in the
   macro body;
@@ -31,9 +35,12 @@ variables.
     You can pass the whole context as an argument by using the special
     ``_context`` variable.
 
+<<<<<<< HEAD
 Import
 ------
 
+=======
+>>>>>>> master
 Macros can be defined in any template, and need to be "imported" before being
 used (see the documentation for the :doc:`import<../tags/import>` tag for more
 information):
@@ -86,6 +93,7 @@ import it locally:
         </div>
     {% endmacro %}
 
+<<<<<<< HEAD
 Named Macro End-Tags
 --------------------
 
@@ -100,4 +108,6 @@ readability:
 
 Of course, the name after the ``endmacro`` word must match the macro name.
 
+=======
+>>>>>>> master
 .. seealso:: :doc:`from<../tags/from>`, :doc:`import<../tags/import>`

@@ -16,6 +16,7 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
     private $deprecations = array();
 
     /**
+<<<<<<< HEAD
      * @group legacy
      */
     public function testLegacyTokenizeSignature()
@@ -37,6 +38,8 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+=======
+>>>>>>> master
      * @expectedException        LogicException
      * @expectedExceptionMessage You must set a loader first.
      * @group legacy
@@ -64,13 +67,20 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo\x3Cbr\x2F\x20\x3E foo\x3Cbr\x2F\x20\x3E', $twig->render('js', array('bar' => 'foo<br/ >')));
     }
 
+<<<<<<< HEAD
     public function escapingStrategyCallback($name)
     {
         return $name;
+=======
+    public function escapingStrategyCallback($filename)
+    {
+        return $filename;
+>>>>>>> master
     }
 
     public function testGlobals()
     {
+<<<<<<< HEAD
         // to be removed in 2.0
         $loader = $this->getMockBuilder('Twig_EnvironmentTestLoaderInterface')->getMock();
         //$loader = $this->getMockBuilder(array('Twig_LoaderInterface', 'Twig_SourceContextLoaderInterface'))->getMock();
@@ -79,6 +89,10 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         // globals can be added after calling getGlobals
 
         $twig = new Twig_Environment($loader);
+=======
+        // globals can be added after calling getGlobals
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->addGlobal('foo', 'bar');
@@ -86,7 +100,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $globals['foo']);
 
         // globals can be modified after a template has been loaded
+<<<<<<< HEAD
         $twig = new Twig_Environment($loader);
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->loadTemplate('index');
@@ -95,7 +113,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $globals['foo']);
 
         // globals can be modified after extensions init
+<<<<<<< HEAD
         $twig = new Twig_Environment($loader);
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->getFunctions();
@@ -104,8 +126,12 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $globals['foo']);
 
         // globals can be modified after extensions and a template has been loaded
+<<<<<<< HEAD
         $arrayLoader = new Twig_Loader_Array(array('index' => '{{foo}}'));
         $twig = new Twig_Environment($arrayLoader);
+=======
+        $twig = new Twig_Environment($loader = new Twig_Loader_Array(array('index' => '{{foo}}')));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->getFunctions();
@@ -114,7 +140,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $globals = $twig->getGlobals();
         $this->assertEquals('bar', $globals['foo']);
 
+<<<<<<< HEAD
         $twig = new Twig_Environment($arrayLoader);
+=======
+        $twig = new Twig_Environment($loader);
+>>>>>>> master
         $twig->getGlobals();
         $twig->addGlobal('foo', 'bar');
         $template = $twig->loadTemplate('index');
@@ -122,7 +152,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
 
         /* to be uncomment in Twig 2.0
         // globals cannot be added after a template has been loaded
+<<<<<<< HEAD
         $twig = new Twig_Environment($loader);
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->loadTemplate('index');
@@ -134,7 +168,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         }
 
         // globals cannot be added after extensions init
+<<<<<<< HEAD
         $twig = new Twig_Environment($loader);
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->getFunctions();
@@ -146,7 +184,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         }
 
         // globals cannot be added after extensions and a template has been loaded
+<<<<<<< HEAD
         $twig = new Twig_Environment($loader);
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addGlobal('foo', 'foo');
         $twig->getGlobals();
         $twig->getFunctions();
@@ -159,7 +201,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         }
 
         // test adding globals after a template has been loaded without call to getGlobals
+<<<<<<< HEAD
         $twig = new Twig_Environment($loader);
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->loadTemplate('index');
         try {
             $twig->addGlobal('bar', 'bar');
@@ -170,6 +216,21 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         */
     }
 
+<<<<<<< HEAD
+=======
+    public function testCompileSourceInlinesSource()
+    {
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+
+        $source = "<? */*foo*/ ?>\r\nbar\n";
+        $expected = "/* <? *//* *foo*//*  ?>*/\n/* bar*/\n/* */\n";
+        $compiled = $twig->compileSource($source, 'index');
+
+        $this->assertContains($expected, $compiled);
+        $this->assertNotContains('/**', $compiled);
+    }
+
+>>>>>>> master
     public function testExtensionsAreNotInitializedWhenRenderingACompiledTemplate()
     {
         $cache = new Twig_Cache_Filesystem($dir = sys_get_temp_dir().'/twig');
@@ -179,7 +240,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $twig = new Twig_Environment($loader = new Twig_Loader_Array(array('index' => '{{ foo }}')), $options);
 
         $key = $cache->generateKey('index', $twig->getTemplateClass('index'));
+<<<<<<< HEAD
         $cache->write($key, $twig->compileSource(new Twig_Source('{{ foo }}', 'index')));
+=======
+        $cache->write($key, $twig->compileSource('{{ foo }}', 'index'));
+>>>>>>> master
 
         // check that extensions won't be initialized when rendering a template that is already in the cache
         $twig = $this
@@ -203,7 +268,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $templateName = __FUNCTION__;
         $templateContent = __FUNCTION__;
 
+<<<<<<< HEAD
         $cache = $this->getMockBuilder('Twig_CacheInterface')->getMock();
+=======
+        $cache = $this->getMock('Twig_CacheInterface');
+>>>>>>> master
         $loader = $this->getMockLoader($templateName, $templateContent);
         $twig = new Twig_Environment($loader, array('cache' => $cache, 'auto_reload' => true, 'debug' => false));
 
@@ -228,7 +297,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $templateName = __FUNCTION__;
         $templateContent = __FUNCTION__;
 
+<<<<<<< HEAD
         $cache = $this->getMockBuilder('Twig_CacheInterface')->getMock();
+=======
+        $cache = $this->getMock('Twig_CacheInterface');
+>>>>>>> master
         $loader = $this->getMockLoader($templateName, $templateContent);
         $twig = new Twig_Environment($loader, array('cache' => $cache, 'auto_reload' => true, 'debug' => false));
 
@@ -256,7 +329,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $templateName = __FUNCTION__;
         $templateContent = __FUNCTION__;
 
+<<<<<<< HEAD
         $cache = $this->getMockBuilder('Twig_CacheInterface')->getMock();
+=======
+        $cache = $this->getMock('Twig_CacheInterface');
+>>>>>>> master
         $loader = $this->getMockLoader($templateName, $templateContent);
         $twig = new Twig_Environment($loader, array('cache' => $cache, 'auto_reload' => true, 'debug' => false));
 
@@ -277,6 +354,7 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $twig->loadTemplate($templateName);
     }
 
+<<<<<<< HEAD
     /**
      * @group legacy
      */
@@ -312,6 +390,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
     public function testAddExtension()
     {
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
+=======
+    public function testAddExtension()
+    {
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension());
 
         $this->assertArrayHasKey('test', $twig->getTags());
@@ -322,6 +405,7 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('foo_binary', $twig->getBinaryOperators());
         $this->assertArrayHasKey('foo_global', $twig->getGlobals());
         $visitors = $twig->getNodeVisitors();
+<<<<<<< HEAD
         $found = false;
         foreach ($visitors as $visitor) {
             if ($visitor instanceof Twig_Tests_EnvironmentTest_NodeVisitor) {
@@ -329,6 +413,9 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
             }
         }
         $this->assertTrue($found);
+=======
+        $this->assertEquals('Twig_Tests_EnvironmentTest_NodeVisitor', get_class($visitors[2]));
+>>>>>>> master
     }
 
     /**
@@ -336,7 +423,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
      */
     public function testAddExtensionWithDeprecatedGetGlobals()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension_WithGlobals());
 
         $this->deprecations = array();
@@ -345,7 +436,11 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('foo_global', $twig->getGlobals());
 
         $this->assertCount(1, $this->deprecations);
+<<<<<<< HEAD
         $this->assertContains('Defining the getGlobals() method in the "Twig_Tests_EnvironmentTest_Extension_WithGlobals" extension ', $this->deprecations[0]);
+=======
+        $this->assertContains('Defining the getGlobals() method in the "environment_test" extension ', $this->deprecations[0]);
+>>>>>>> master
 
         restore_error_handler();
     }
@@ -355,8 +450,13 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
      */
     public function testRemoveExtension()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
         $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension_WithDeprecatedName());
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+        $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension());
+>>>>>>> master
         $twig->removeExtension('environment_test');
 
         $this->assertFalse(array_key_exists('test', $twig->getTags()));
@@ -371,6 +471,7 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
 
     public function testAddMockExtension()
     {
+<<<<<<< HEAD
         // should be replaced by the following in 2.0 (this current code is just to avoid a dep notice)
         // $extension = $this->getMockBuilder('Twig_Extension')->getMock();
         $extension = eval(<<<EOF
@@ -380,19 +481,33 @@ class Twig_Tests_EnvironmentTest_ExtensionInEval extends Twig_Extension
 EOF
         );
         $extension = new Twig_Tests_EnvironmentTest_ExtensionInEval();
+=======
+        $extension = $this->getMock('Twig_ExtensionInterface');
+        $extension->expects($this->once())
+            ->method('getName')
+            ->will($this->returnValue('mock'));
+>>>>>>> master
 
         $loader = new Twig_Loader_Array(array('page' => 'hey'));
 
         $twig = new Twig_Environment($loader);
         $twig->addExtension($extension);
 
+<<<<<<< HEAD
         $this->assertInstanceOf('Twig_ExtensionInterface', $twig->getExtension(get_class($extension)));
+=======
+        $this->assertInstanceOf('Twig_ExtensionInterface', $twig->getExtension('mock'));
+>>>>>>> master
         $this->assertTrue($twig->isTemplateFresh('page', time()));
     }
 
     public function testInitRuntimeWithAnExtensionUsingInitRuntimeNoDeprecation()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addExtension(new Twig_Tests_EnvironmentTest_ExtensionWithoutDeprecationInitRuntime());
 
         $twig->initRuntime();
@@ -403,7 +518,11 @@ EOF
      */
     public function testInitRuntimeWithAnExtensionUsingInitRuntimeDeprecation()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addExtension(new Twig_Tests_EnvironmentTest_ExtensionWithDeprecationInitRuntime());
 
         $this->deprecations = array();
@@ -412,7 +531,11 @@ EOF
         $twig->initRuntime();
 
         $this->assertCount(1, $this->deprecations);
+<<<<<<< HEAD
         $this->assertContains('Defining the initRuntime() method in the "Twig_Tests_EnvironmentTest_ExtensionWithDeprecationInitRuntime" extension is deprecated since version 1.23.', $this->deprecations[0]);
+=======
+        $this->assertContains('Defining the initRuntime() method in the "with_deprecation" extension is deprecated since version 1.23.', $this->deprecations[0]);
+>>>>>>> master
 
         restore_error_handler();
     }
@@ -429,14 +552,23 @@ EOF
      */
     public function testOverrideExtension()
     {
+<<<<<<< HEAD
         $twig = new Twig_Environment($this->getMockBuilder('Twig_LoaderInterface')->getMock());
+=======
+        $twig = new Twig_Environment($this->getMock('Twig_LoaderInterface'));
+>>>>>>> master
         $twig->addExtension(new Twig_Tests_EnvironmentTest_ExtensionWithDeprecationInitRuntime());
 
         $this->deprecations = array();
         set_error_handler(array($this, 'handleError'));
 
+<<<<<<< HEAD
         $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension_WithDeprecatedName());
         $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension_WithDeprecatedName());
+=======
+        $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension());
+        $twig->addExtension(new Twig_Tests_EnvironmentTest_Extension());
+>>>>>>> master
 
         $this->assertCount(1, $this->deprecations);
         $this->assertContains('The possibility to register the same extension twice', $this->deprecations[0]);
@@ -444,6 +576,7 @@ EOF
         restore_error_handler();
     }
 
+<<<<<<< HEAD
     public function testAddRuntimeLoader()
     {
         $runtimeLoader = $this->getMockBuilder('Twig_RuntimeLoaderInterface')->getMock();
@@ -479,6 +612,15 @@ EOF
           ->method('getSourceContext')
           ->with($templateName)
           ->will($this->returnValue(new Twig_Source($templateContent, $templateName)));
+=======
+    protected function getMockLoader($templateName, $templateContent)
+    {
+        $loader = $this->getMock('Twig_LoaderInterface');
+        $loader->expects($this->any())
+          ->method('getSource')
+          ->with($templateName)
+          ->will($this->returnValue($templateContent));
+>>>>>>> master
         $loader->expects($this->any())
           ->method('getCacheKey')
           ->with($templateName)
@@ -496,6 +638,14 @@ class Twig_Tests_EnvironmentTest_Extension_WithGlobals extends Twig_Extension
             'foo_global' => 'foo_global',
         );
     }
+<<<<<<< HEAD
+=======
+
+    public function getName()
+    {
+        return 'environment_test';
+    }
+>>>>>>> master
 }
 
 class Twig_Tests_EnvironmentTest_Extension extends Twig_Extension implements Twig_Extension_GlobalsInterface
@@ -549,16 +699,21 @@ class Twig_Tests_EnvironmentTest_Extension extends Twig_Extension implements Twi
             'foo_global' => 'foo_global',
         );
     }
+<<<<<<< HEAD
 }
 
 class Twig_Tests_EnvironmentTest_Extension_WithDeprecatedName extends Twig_Extension
 {
+=======
+
+>>>>>>> master
     public function getName()
     {
         return 'environment_test';
     }
 }
 
+<<<<<<< HEAD
 class Twig_Tests_EnvironmentTest_Extension_DynamicWithDeprecatedName extends Twig_Extension
 {
     private $name;
@@ -574,6 +729,8 @@ class Twig_Tests_EnvironmentTest_Extension_DynamicWithDeprecatedName extends Twi
     }
 }
 
+=======
+>>>>>>> master
 class Twig_Tests_EnvironmentTest_TokenParser extends Twig_TokenParser
 {
     public function parse(Twig_Token $token)
@@ -609,6 +766,7 @@ class Twig_Tests_EnvironmentTest_ExtensionWithDeprecationInitRuntime extends Twi
     public function initRuntime(Twig_Environment $env)
     {
     }
+<<<<<<< HEAD
 }
 
 class Twig_Tests_EnvironmentTest_ExtensionWithoutDeprecationInitRuntime extends Twig_Extension implements Twig_Extension_InitRuntimeInterface
@@ -626,10 +784,24 @@ class Twig_Tests_EnvironmentTest_ExtensionWithoutRuntime extends Twig_Extension
             new Twig_SimpleFunction('from_runtime_array', array('Twig_Tests_EnvironmentTest_Runtime', 'fromRuntime')),
             new Twig_SimpleFunction('from_runtime_string', 'Twig_Tests_EnvironmentTest_Runtime::fromRuntime'),
         );
+=======
+
+    public function getName()
+    {
+        return 'with_deprecation';
+    }
+}
+
+class Twig_Tests_EnvironmentTest_ExtensionWithoutDeprecationInitRuntime extends Twig_Extension implements Twig_Extension_InitRuntimeInterface
+{
+    public function initRuntime(Twig_Environment $env)
+    {
+>>>>>>> master
     }
 
     public function getName()
     {
+<<<<<<< HEAD
         return 'from_runtime';
     }
 }
@@ -645,3 +817,8 @@ class Twig_Tests_EnvironmentTest_Runtime
 interface Twig_EnvironmentTestLoaderInterface extends Twig_LoaderInterface, Twig_SourceContextLoaderInterface
 {
 }
+=======
+        return 'without_deprecation';
+    }
+}
+>>>>>>> master

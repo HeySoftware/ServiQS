@@ -24,7 +24,11 @@ class Twig_Tests_Node_SandboxedPrintTest extends Twig_Test_NodeTestCase
 
         $tests[] = array(new Twig_Node_SandboxedPrint(new Twig_Node_Expression_Constant('foo', 1), 1), <<<EOF
 // line 1
+<<<<<<< HEAD
 echo \$this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed("foo");
+=======
+echo \$this->env->getExtension('sandbox')->ensureToStringAllowed("foo");
+>>>>>>> master
 EOF
         );
 

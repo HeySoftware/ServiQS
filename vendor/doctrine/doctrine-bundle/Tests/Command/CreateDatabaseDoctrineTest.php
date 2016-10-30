@@ -27,7 +27,11 @@ class CreateDatabaseDoctrineTest extends \PHPUnit_Framework_TestCase
         $params = array(
             'dbname' => $dbName,
             'memory' => true,
+<<<<<<< HEAD
             'driver' => 'pdo_sqlite',
+=======
+            'driver' => 'pdo_sqlite'
+>>>>>>> master
         );
 
         $application = new Application();
@@ -44,6 +48,7 @@ class CreateDatabaseDoctrineTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("Created database \"$dbName\" for connection named $connectionName", $commandTester->getDisplay());
     }
 
+<<<<<<< HEAD
     public function testExecuteWithShardOption()
     {
         $connectionName = 'default';
@@ -82,6 +87,15 @@ class CreateDatabaseDoctrineTest extends \PHPUnit_Framework_TestCase
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function getMockContainer($connectionName, $params = null)
+=======
+
+    /**
+     * @param $connectionName
+     * @param null $params Connection parameters
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockContainer($connectionName, $params=null)
+>>>>>>> master
     {
         // Mock the container and everything you'll need here
         $mockDoctrine = $this->getMockBuilder('Doctrine\Common\Persistence\ConnectionRegistry')
@@ -90,7 +104,13 @@ class CreateDatabaseDoctrineTest extends \PHPUnit_Framework_TestCase
         $mockDoctrine->expects($this->any())
             ->method('getDefaultConnectionName')
             ->withAnyParameters()
+<<<<<<< HEAD
             ->willReturn($connectionName);
+=======
+            ->willReturn($connectionName)
+        ;
+
+>>>>>>> master
 
         $mockConnection = $this->getMockBuilder('Doctrine\DBAL\Connection')
             ->disableOriginalConstructor()
@@ -102,10 +122,19 @@ class CreateDatabaseDoctrineTest extends \PHPUnit_Framework_TestCase
             ->withAnyParameters()
             ->willReturn($params);
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> master
         $mockDoctrine->expects($this->any())
             ->method('getConnection')
             ->withAnyParameters()
             ->willReturn($mockConnection);
+<<<<<<< HEAD
+=======
+        ;
+
+>>>>>>> master
 
         $mockContainer = $this->getMockBuilder('Symfony\Component\DependencyInjection\Container')
             ->setMethods(array('get'))

@@ -15,7 +15,10 @@
         <env name="DUMP_STRING_LENGTH" value="" />
         <env name="LDAP_HOST" value="127.0.0.1" />
         <env name="LDAP_PORT" value="3389" />
+<<<<<<< HEAD
         <env name="REDIS_HOST" value="localhost" />
+=======
+>>>>>>> master
     </php>
 
     <testsuites>

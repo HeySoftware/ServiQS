@@ -15,7 +15,10 @@
             auth-mode="login"
             timeout="1000"
             source-ip="127.0.0.1"
+<<<<<<< HEAD
             local-domain="local.example.com"
+=======
+>>>>>>> master
             logging="true"
             delivery-address="single@host.com">
         <swiftmailer:antiflood/>

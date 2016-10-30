@@ -11,22 +11,35 @@
 
 namespace Symfony\Bundle\SwiftmailerBundle\Tests\DependencyInjection;
 
+<<<<<<< HEAD
 use Symfony\Bundle\SwiftmailerBundle\DependencyInjection\SwiftmailerExtension;
 use Symfony\Component\DependencyInjection\Compiler\ResolveDefinitionTemplatesPass;
+=======
+use Symfony\Bundle\SwiftmailerBundle\Tests\TestCase;
+use Symfony\Bundle\SwiftmailerBundle\DependencyInjection\SwiftmailerExtension;
+>>>>>>> master
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\Config\FileLocator;
 
+<<<<<<< HEAD
 class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
+=======
+class SwiftmailerExtensionTest extends TestCase
+>>>>>>> master
 {
     public function getConfigTypes()
     {
         return array(
             array('xml'),
             array('php'),
+<<<<<<< HEAD
             array('yml'),
+=======
+            array('yml')
+>>>>>>> master
         );
     }
 
@@ -35,6 +48,7 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultConfig($type)
     {
+<<<<<<< HEAD
         $requestContext = $this->getMock('Symfony\Component\Routing\RequestContext', array('getHost'));
         $requestContext->expects($this->once())->method('getHost')->will($this->returnValue('example.org'));
         $services = array('router.request_context' => $requestContext);
@@ -58,6 +72,12 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $container = $this->loadContainerFromFile('null_mailer', $type);
         $this->assertEquals('swiftmailer.mailer.failover.transport', (string) $container->getAlias('swiftmailer.transport'));
+=======
+        $container = $this->loadContainerFromFile('empty', $type);
+
+        $this->assertEquals('swiftmailer.mailer.default.transport', (string) $container->getAlias('swiftmailer.transport'));
+        $this->assertEquals('swiftmailer.mailer.default.transport.smtp', (string) $container->getAlias('swiftmailer.mailer.default.transport'));
+>>>>>>> master
     }
 
     /**
@@ -65,6 +85,7 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendmailConfig($type)
     {
+<<<<<<< HEAD
         // Local domain is specified explicitly, so the request context host is ignored.
         $requestContext = $this->getMock('Symfony\Component\Routing\RequestContext', array('getHost'));
         $requestContext->expects($this->any())->method('getHost')->will($this->returnValue('example.org'));
@@ -76,6 +97,12 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('swiftmailer.mailer.default.transport.sendmail', (string) $container->getAlias('swiftmailer.mailer.default.transport'));
 
         $this->assertEquals('local.example.org', $container->get('swiftmailer.mailer.default.transport')->getLocalDomain());
+=======
+        $container = $this->loadContainerFromFile('sendmail', $type);
+
+        $this->assertEquals('swiftmailer.mailer.default.transport', (string) $container->getAlias('swiftmailer.transport'));
+        $this->assertEquals('swiftmailer.mailer.default.transport.sendmail', (string) $container->getAlias('swiftmailer.mailer.default.transport'));
+>>>>>>> master
     }
 
     /**
@@ -120,7 +147,10 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.default.transport.smtp.auth_mode'));
         $this->assertEquals('1000', $container->getParameter('swiftmailer.mailer.default.transport.smtp.timeout'));
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.default.transport.smtp.source_ip'));
+<<<<<<< HEAD
         $this->assertEquals('local.example.com', $container->getParameter('swiftmailer.mailer.default.transport.smtp.local_domain'));
+=======
+>>>>>>> master
         $this->assertSame(array('swiftmailer.default.plugin' => array(array())), $container->getDefinition('swiftmailer.mailer.default.plugin.redirecting')->getTags());
         $this->assertSame('single@host.com', $container->getParameter('swiftmailer.mailer.default.single_address'));
         $this->assertEquals(array('/foo@.*/', '/.*@bar.com$/'), $container->getParameter('swiftmailer.mailer.default.delivery_whitelist'));
@@ -145,8 +175,11 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.first_mailer.transport.smtp.auth_mode'));
         $this->assertEquals('1000', $container->getParameter('swiftmailer.mailer.first_mailer.transport.smtp.timeout'));
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.first_mailer.transport.smtp.source_ip'));
+<<<<<<< HEAD
         $this->assertEquals('first.example.org', $container->getParameter('swiftmailer.mailer.first_mailer.transport.smtp.local_domain'));
 
+=======
+>>>>>>> master
         $this->assertEquals('example.org', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.host'));
         $this->assertEquals('54321', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.port'));
         $this->assertEquals('tls', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.encryption'));
@@ -154,9 +187,13 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('pass_secondary', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.password'));
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.auth_mode'));
         $this->assertEquals('1000', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.timeout'));
+<<<<<<< HEAD
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.source_ip'));
         $this->assertEquals('second.example.org', $container->getParameter('swiftmailer.mailer.secondary_mailer.transport.smtp.local_domain'));
 
+=======
+        $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.source_ip'));
+>>>>>>> master
         $this->assertEquals('example.org', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.host'));
         $this->assertEquals('12345', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.port'));
         $this->assertEquals('tls', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.encryption'));
@@ -165,9 +202,13 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.auth_mode'));
         $this->assertEquals('1000', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.timeout'));
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.source_ip'));
+<<<<<<< HEAD
         $this->assertEquals('third.example.org', $container->getParameter('swiftmailer.mailer.third_mailer.transport.smtp.local_domain'));
     }
 
+=======
+    }
+>>>>>>> master
     /**
      * @dataProvider getConfigTypes
      */
@@ -175,6 +216,10 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $container = $this->loadContainerFromFile('urls', $type);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         $this->assertEquals('example.com', $container->getParameter('swiftmailer.mailer.smtp_mailer.transport.smtp.host'));
         $this->assertEquals('12345', $container->getParameter('swiftmailer.mailer.smtp_mailer.transport.smtp.port'));
         $this->assertEquals('tls', $container->getParameter('swiftmailer.mailer.smtp_mailer.transport.smtp.encryption'));
@@ -183,7 +228,11 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.smtp_mailer.transport.smtp.auth_mode'));
     }
 
+<<<<<<< HEAD
     /**
+=======
+        /**
+>>>>>>> master
      * @dataProvider getConfigTypes
      */
     public function testOneMailer($type)
@@ -200,8 +249,11 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('pass', $container->getParameter('swiftmailer.mailer.main_mailer.transport.smtp.password'));
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.main_mailer.transport.smtp.auth_mode'));
         $this->assertEquals('1000', $container->getParameter('swiftmailer.mailer.main_mailer.transport.smtp.timeout'));
+<<<<<<< HEAD
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.main_mailer.transport.smtp.source_ip'));
         $this->assertEquals('local.example.org', $container->getParameter('swiftmailer.mailer.main_mailer.transport.smtp.local_domain'));
+=======
+>>>>>>> master
     }
 
     /**
@@ -274,6 +326,7 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('login', $container->getParameter('swiftmailer.mailer.default.transport.smtp.auth_mode'));
         $this->assertEquals('1000', $container->getParameter('swiftmailer.mailer.default.transport.smtp.timeout'));
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.default.transport.smtp.source_ip'));
+<<<<<<< HEAD
         $this->assertEquals('local.example.org', $container->getParameter('swiftmailer.mailer.default.transport.smtp.local_domain'));
     }
 
@@ -291,6 +344,8 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('12345', $container->getParameter('swiftmailer.mailer.default.transport.smtp.port'));
         $this->assertEquals('127.0.0.1', $container->getParameter('swiftmailer.mailer.default.transport.smtp.source_ip'));
         $this->assertEquals(array('ssl' => array('verify_peer' => true, 'verify_depth' => 5, 'cafile' => '/etc/ssl/cacert.pem', 'CN_match' => 'ssl.example.com')), $container->getParameter('swiftmailer.mailer.default.transport.smtp.stream_options'));
+=======
+>>>>>>> master
     }
 
     /**
@@ -352,6 +407,7 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $file
      * @param string $type
      * @param array  $services
@@ -359,18 +415,30 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
      * @return ContainerBuilder
      */
     private function loadContainerFromFile($file, $type, array $services = array())
+=======
+     * @param  string           $file
+     * @param  string           $type
+     * @return ContainerBuilder
+     */
+    private function loadContainerFromFile($file, $type)
+>>>>>>> master
     {
         $container = new ContainerBuilder();
 
         $container->setParameter('kernel.debug', false);
         $container->setParameter('kernel.cache_dir', '/tmp');
 
+<<<<<<< HEAD
         foreach ($services as $id => $service) {
             $container->set($id, $service);
         }
 
         $container->registerExtension(new SwiftmailerExtension());
         $locator = new FileLocator(__DIR__.'/Fixtures/config/'.$type);
+=======
+        $container->registerExtension(new SwiftmailerExtension());
+        $locator = new FileLocator(__DIR__ . '/Fixtures/config/' . $type);
+>>>>>>> master
 
         switch ($type) {
             case 'xml':
@@ -386,11 +454,17 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
                 break;
         }
 
+<<<<<<< HEAD
         $loader->load($file.'.'.$type);
 
         $container->getCompilerPassConfig()->setOptimizationPasses(array(
             new ResolveDefinitionTemplatesPass()
         ));
+=======
+        $loader->load($file . '.' . $type);
+
+        $container->getCompilerPassConfig()->setOptimizationPasses(array());
+>>>>>>> master
         $container->getCompilerPassConfig()->setRemovingPasses(array());
         $container->compile();
 

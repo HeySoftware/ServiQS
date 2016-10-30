@@ -105,6 +105,7 @@ class Twig_Tests_Node_Expression_CallTest extends PHPUnit_Framework_TestCase
     public function customFunctionWithArbitraryArguments()
     {
     }
+<<<<<<< HEAD
 
     /**
      * @expectedException              LogicException
@@ -125,6 +126,8 @@ class Twig_Tests_Node_Expression_CallTest extends PHPUnit_Framework_TestCase
         $node = new Twig_Tests_Node_Expression_Call(array(), array('type' => 'function', 'name' => 'foo', 'is_variadic' => true));
         $node->getArguments(new CallableTestClass(), array());
     }
+=======
+>>>>>>> master
 }
 
 class Twig_Tests_Node_Expression_Call extends Twig_Node_Expression_Call
@@ -134,6 +137,7 @@ class Twig_Tests_Node_Expression_Call extends Twig_Node_Expression_Call
         return parent::getArguments($callable, $arguments);
     }
 }
+<<<<<<< HEAD
 
 class CallableTestClass
 {
@@ -145,3 +149,5 @@ class CallableTestClass
 function custom_Twig_Tests_Node_Expression_CallTest_function($required)
 {
 }
+=======
+>>>>>>> master

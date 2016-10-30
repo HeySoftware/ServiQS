@@ -159,7 +159,11 @@ class GenerateCommandCommandTest extends GenerateCommandTest
 
     protected function setBundle()
     {
+<<<<<<< HEAD
         $bundle = $this->getMockBuilder('Symfony\Component\HttpKernel\Bundle\BundleInterface')->getMock();
+=======
+        $bundle = $this->getMock('Symfony\Component\HttpKernel\Bundle\BundleInterface');
+>>>>>>> master
         $bundle->expects($this->any())->method('getPath')->will($this->returnValue($this->tmpDir));
         $bundle->expects($this->any())->method('getName')->will($this->returnValue('FooBarBundle'));
         $bundle->expects($this->any())->method('getNamespace')->will($this->returnValue('Foo\BarBundle'));

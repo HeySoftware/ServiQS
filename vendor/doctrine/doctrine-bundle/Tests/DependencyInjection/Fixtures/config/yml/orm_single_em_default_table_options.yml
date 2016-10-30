@@ -18,5 +18,9 @@ doctrine:
             manual:
                 type: xml
                 prefix: Fixtures\Bundles\XmlBundle
+<<<<<<< HEAD
                 dir: "%kernel.root_dir%/Tests/DependencyInjection/Fixtures/Bundles/XmlBundle/Resources/config/doctrine"
+=======
+                dir: %kernel.root_dir%/Tests/DependencyInjection/Fixtures/Bundles/XmlBundle/Resources/config/doctrine
+>>>>>>> master
                 alias: TestAlias
