@@ -1,2 +1,2 @@
 # ServiQS
-Solo una Branch
+~~Solo una Branch~~ Branchs independientes y luego merge
